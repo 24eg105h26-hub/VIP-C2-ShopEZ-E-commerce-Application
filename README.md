@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # shopEZ - B2C E-Commerce Marketplace (MERN Stack)
 
 shopEZ is a zero-compromise B2C e-commerce marketplace featuring fully isolated Customer, Seller, and Admin portals. The system supports full-text search, variant inventory locks, JWT auth with refresh token rotation, and Stripe/Razorpay checkouts.
