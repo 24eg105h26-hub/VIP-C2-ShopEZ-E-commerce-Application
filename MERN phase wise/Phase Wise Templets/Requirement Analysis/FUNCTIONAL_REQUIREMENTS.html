@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUNCTIONAL_REQUIREMENTS</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.2;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            background: white;
+        }
+        
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            border-bottom: 2pt solid #003366;
+            padding-bottom: 6pt;
+        }
+        
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            color: #003366;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 9pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+        }
+        
+        p {
+            margin-bottom: 6pt;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 18pt;
+            margin-bottom: 6pt;
+        }
+        
+        li {
+            margin-bottom: 3pt;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 6pt;
+        }
+        
+        th, td {
+            border: 1pt solid #999;
+            padding: 6pt;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2pt 4pt;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+            border-radius: 3pt;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 10pt;
+            border-left: 3pt solid #003366;
+            margin-bottom: 6pt;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+        }
+        
+        blockquote {
+            border-left: 4pt solid #003366;
+            margin-left: 0;
+            padding-left: 10pt;
+            margin-bottom: 6pt;
+            font-style: italic;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 1in;
+            }
+            
+            h1 {
+                page-break-after: avoid;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>ShopEZ - Functional Requirements Document</h1>
+</p><p>
+<h2>1. Authentication & Authorization</h2>
+</p><p>
+<h3>FR-1.1: User Registration</h3>
+<li>**Description**: Allow users to register as Customer or Seller</li>
+<li>**Actors**: Anonymous Users</li>
+<li>**Preconditions**: User is not registered</li>
+<li>**Steps**:</li>
+  1. User navigates to signup page
+  2. Selects role (Customer/Seller)
+  3. Enters email, password, full name
+  4. Validates input
+  5. Creates user record with hashed password
+  6. Sends verification email
+<li>**Postconditions**: User account created in pending state</li>
+<li>**Acceptance Criteria**:</li>
+  - Password minimum 8 characters
+  - Email format validation
+  - Unique email validation
+  - Verification email sent within 5 seconds
+</p><p>
+<h3>FR-1.2: Email Verification</h3>
+<li>**Description**: Verify user email address</li>
+<li>**Actors**: Registered Users</li>
+<li>**Preconditions**: User has received verification email</li>
+<li>**Steps**:</li>
+  1. User clicks verification link in email
+  2. System validates token
+  3. Marks email as verified
+  4. Enables login access
+<li>**Postconditions**: User can now login</li>
+<li>**Acceptance Criteria**:</li>
+  - Token valid for 24 hours
+  - One-time use token
+  - Clear error messages
+</p><p>
+<h3>FR-1.3: User Login</h3>
+<li>**Description**: Authenticate user with email and password</li>
+<li>**Actors**: Registered Users</li>
+<li>**Preconditions**: Email verified</li>
+<li>**Steps**:</li>
+  1. User enters email and password
+  2. System validates credentials
+  3. Creates JWT access token (15 min validity)
+  4. Creates refresh token (7 days validity)
+  5. Sets secure HTTP-only cookies
+<li>**Postconditions**: User authenticated and logged in</li>
+<li>**Acceptance Criteria**:</li>
+  - Login < 500ms
+  - Secure cookie flags set
+  - Failed attempts logged
+  - Rate limited to 5 attempts per minute
+</p><p>
+<h3>FR-1.4: Refresh Token Rotation</h3>
+<li>**Description**: Refresh access token using refresh token</li>
+<li>**Actors**: Authenticated Users</li>
+<li>**Preconditions**: Refresh token valid</li>
+<li>**Steps**:</li>
+  1. Client sends refresh token
+  2. System validates token
+  3. Generates new access token
+  4. Generates new refresh token (reuse detection)
+  5. Invalidates old refresh token
+<li>**Postconditions**: New tokens issued, old token invalidated</li>
+<li>**Acceptance Criteria**:</li>
+  - Process < 100ms
+  - Detects token reuse (security)
+  - Returns new token set
+</p><p>
+<h3>FR-1.5: User Logout</h3>
+<li>**Description**: Invalidate user tokens and end session</li>
+<li>**Actors**: Authenticated Users</li>
+<li>**Preconditions**: User authenticated</li>
+<li>**Steps**:</li>
+  1. User clicks logout
+  2. System invalidates refresh token
+  3. Clears session cookies
+  4. Logs logout event
+<li>**Postconditions**: User session terminated</li>
+<li>**Acceptance Criteria**:</li>
+  - Immediate effect
+  - Token blacklisted
+  - Cannot reuse old tokens
+</p><p>
+<h3>FR-1.6: Account Deletion</h3>
+<li>**Description**: Allow users to delete their account</li>
+<li>**Actors**: Authenticated Users</li>
+<li>**Preconditions**: User authenticated, confirmed action</li>
+<li>**Steps**:</li>
+  1. User confirms deletion
+  2. System verifies password
+  3. Marks account as deleted
+  4. Anonymizes user data
+  5. Removes personal information
+<li>**Postconditions**: User data anonymized, account inactive</li>
+<li>**Acceptance Criteria**:</li>
+  - Requires password confirmation
+  - Deletes personal data
+  - Keeps transaction records (anonymized)
+</p><p>
+---
+</p><p>
+<h2>2. Product Management</h2>
+</p><p>
+<h3>FR-2.1: View Products</h3>
+<li>**Description**: Display products with filters and search</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: Products exist in database</li>
+<li>**Steps**:</li>
+  1. User navigates to products page
+  2. System fetches products with pagination
+  3. Displays product cards with images
+  4. Shows price and availability
+<li>**Postconditions**: Products displayed with pagination</li>
+<li>**Acceptance Criteria**:</li>
+  - Load < 2 seconds
+  - Pagination 20 items/page
+  - Real-time availability
+  - Image caching
+</p><p>
+<h3>FR-2.2: Product Search</h3>
+<li>**Description**: Full-text search across products</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: Products exist</li>
+<li>**Steps**:</li>
+  1. User enters search query
+  2. System performs full-text search
+  3. Returns matching products
+  4. Ranks by relevance
+<li>**Postconditions**: Search results displayed</li>
+<li>**Acceptance Criteria**:</li>
+  - Response < 500ms
+  - Searches name, description, category
+  - Case-insensitive matching
+  - Typo tolerance (Phase 2)
+</p><p>
+<h3>FR-2.3: Advanced Filtering</h3>
+<li>**Description**: Filter products by multiple criteria</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: Products exist</li>
+<li>**Steps**:</li>
+  1. User selects filter criteria (category, price, rating)
+  2. System applies filters
+  3. Updates product results
+  4. Shows filter options dynamically
+<li>**Postconditions**: Filtered results displayed</li>
+<li>**Acceptance Criteria**:</li>
+  - Multiple filter combinations
+  - Price range filtering
+  - Category filtering
+  - Rating filtering
+</p><p>
+<h3>FR-2.4: Product Details</h3>
+<li>**Description**: Display detailed product information</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: Product exists</li>
+<li>**Steps**:</li>
+  1. User clicks on product
+  2. System fetches product details
+  3. Displays images, variants, reviews
+  4. Shows seller information
+  5. Displays in-stock variants
+<li>**Postconditions**: Product details page rendered</li>
+<li>**Acceptance Criteria**:</li>
+  - Multiple image gallery
+  - All variants displayed
+  - Reviews section
+  - Seller details with rating
+</p><p>
+<h3>FR-2.5: Product Variants</h3>
+<li>**Description**: Display product variants (size, color, etc)</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: Product has variants</li>
+<li>**Steps**:</li>
+  1. User views product page
+  2. System displays available variants
+  3. Shows stock status per variant
+  4. Updates price for selected variant
+  5. Prevents out-of-stock selection
+<li>**Postconditions**: Variant selection enabled</li>
+<li>**Acceptance Criteria**:</li>
+  - Shows all available variants
+  - Real-time stock updates
+  - Prevents stock overselling
+  - Clear variant differences
+</p><p>
+---
+</p><p>
+<h2>3. Shopping Cart & Checkout</h2>
+</p><p>
+<h3>FR-3.1: Add to Cart</h3>
+<li>**Description**: Add product variants to cart</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: User authenticated, product available</li>
+<li>**Steps**:</li>
+  1. User selects variant
+  2. Enters quantity
+  3. Clicks add to cart
+  4. System validates stock
+  5. Updates cart count
+  6. Shows confirmation
+<li>**Postconditions**: Item added to cart</li>
+<li>**Acceptance Criteria**:</li>
+  - Prevents stock overselling
+  - Persists in database
+  - Updates UI immediately
+  - Quantity limits per variant
+</p><p>
+<h3>FR-3.2: View Cart</h3>
+<li>**Description**: Display all items in shopping cart</li>
+<li>**Actors**: Authenticated Users</li>
+<li>**Preconditions**: Items in cart</li>
+<li>**Steps**:</li>
+  1. User clicks cart icon
+  2. System fetches cart items
+  3. Displays items with prices
+  4. Shows total and subtotal
+  5. Allows quantity adjustment
+<li>**Postconditions**: Cart displayed with all details</li>
+<li>**Acceptance Criteria**:</li>
+  - Real-time price updates
+  - Quantity adjustment
+  - Remove item option
+  - Stock status check
+</p><p>
+<h3>FR-3.3: Checkout Process</h3>
+<li>**Description**: Complete purchase transaction</li>
+<li>**Actors**: Authenticated Customers</li>
+<li>**Preconditions**: Items in cart, user authenticated</li>
+<li>**Steps**:</li>
+  1. User reviews cart
+  2. Enters shipping address
+  3. Selects shipping method
+  4. Enters payment details
+  5. Reviews order summary
+  6. Confirms purchase
+  7. Payment processed
+  8. Order created
+<li>**Postconditions**: Order created, payment processed</li>
+<li>**Acceptance Criteria**:</li>
+  - Address validation
+  - Inventory lock during checkout
+  - Payment processing < 5 seconds
+  - Order confirmation email
+</p><p>
+<h3>FR-3.4: Multiple Payment Options</h3>
+<li>**Description**: Support Stripe and Razorpay payments</li>
+<li>**Actors**: Customers at checkout</li>
+<li>**Preconditions**: Checkout initiated</li>
+<li>**Steps**:</li>
+  1. User selects payment method
+  2. Redirected to payment gateway
+  3. Completes payment
+  4. Webhook confirms transaction
+  5. Order finalized
+<li>**Postconditions**: Payment completed, order confirmed</li>
+<li>**Acceptance Criteria**:</li>
+  - Both gateways functional
+  - Secure payment processing
+  - Clear success/failure messages
+  - Webhook verification
+</p><p>
+---
+</p><p>
+<h2>4. Order Management</h2>
+</p><p>
+<h3>FR-4.1: Create Order</h3>
+<li>**Description**: Create order from cart checkout</li>
+<li>**Actors**: Customers</li>
+<li>**Preconditions**: Successful payment</li>
+<li>**Steps**:</li>
+  1. Payment confirmed
+  2. System creates order record
+  3. Generates order number
+  4. Sends confirmation email
+  5. Notifies seller
+  6. Clears cart
+<li>**Postconditions**: Order created and confirmed</li>
+<li>**Acceptance Criteria**:</li>
+  - Order number generated
+  - Email within 5 seconds
+  - Real-time notification
+  - Cart cleared
+</p><p>
+<h3>FR-4.2: View Order Details</h3>
+<li>**Description**: Display customer order details</li>
+<li>**Actors**: Customers, Sellers, Admin</li>
+<li>**Preconditions**: Order exists</li>
+<li>**Steps**:</li>
+  1. User navigates to orders
+  2. Selects order
+  3. System displays details
+  4. Shows status and timeline
+  5. Displays tracking information
+<li>**Postconditions**: Order details displayed</li>
+<li>**Acceptance Criteria**:</li>
+  - All order information
+  - Status timeline
+  - Payment details
+  - Shipping address
+</p><p>
+<h3>FR-4.3: Order Status Tracking</h3>
+<li>**Description**: Real-time order status updates</li>
+<li>**Actors**: Customers, Sellers</li>
+<li>**Preconditions**: Order exists</li>
+<li>**Steps**:</li>
+  1. Order status changes
+  2. System updates status
+  3. Sends notification
+  4. Updates order timeline
+  5. Notifies relevant parties
+<li>**Postconditions**: Status updated and notified</li>
+<li>**Acceptance Criteria**:</li>
+  - Real-time updates (WebSocket)
+  - Status options: Pending, Confirmed, Processing, Shipped, Delivered
+  - Timestamp for each status
+</p><p>
+<h3>FR-4.4: Cancel Order</h3>
+<li>**Description**: Allow order cancellation within timeframe</li>
+<li>**Actors**: Customers</li>
+<li>**Preconditions**: Order not shipped</li>
+<li>**Steps**:</li>
+  1. User selects order to cancel
+  2. System validates cancellation eligibility
+  3. Processes refund
+  4. Updates order status
+  5. Notifies seller and customer
+<li>**Postconditions**: Order cancelled, refund initiated</li>
+<li>**Acceptance Criteria**:</li>
+  - Cancellable within 24 hours
+  - Automatic refund processing
+  - Notification sent
+</p><p>
+---
+</p><p>
+<h2>5. Review & Rating System</h2>
+</p><p>
+<h3>FR-5.1: Create Review</h3>
+<li>**Description**: Allow customers to review products</li>
+<li>**Actors**: Customers (who purchased)</li>
+<li>**Preconditions**: Customer has purchased product</li>
+<li>**Steps**:</li>
+  1. User navigates to product
+  2. Clicks write review
+  3. Enters rating (1-5 stars)
+  4. Writes review text
+  5. Submits review
+  6. System validates and stores
+<li>**Postconditions**: Review created and published</li>
+<li>**Acceptance Criteria**:</li>
+  - Rating 1-5 stars
+  - Review text optional
+  - Only verified buyers can review
+  - Reviews moderated
+</p><p>
+<h3>FR-5.2: View Reviews</h3>
+<li>**Description**: Display product reviews and ratings</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: Reviews exist</li>
+<li>**Steps**:</li>
+  1. User views product
+  2. System displays reviews
+  3. Shows average rating
+  4. Displays review count
+  5. Shows individual reviews with ratings
+<li>**Postconditions**: Reviews displayed</li>
+<li>**Acceptance Criteria**:</li>
+  - Shows average rating
+  - Sorts by helpful/newest
+  - Displays customer name, rating, text
+  - Shows review date
+</p><p>
+---
+</p><p>
+<h2>6. Wishlist Management</h2>
+</p><p>
+<h3>FR-6.1: Add to Wishlist</h3>
+<li>**Description**: Save products to wishlist</li>
+<li>**Actors**: Authenticated Users</li>
+<li>**Preconditions**: Product exists, user authenticated</li>
+<li>**Steps**:</li>
+  1. User clicks wishlist icon
+  2. System adds to wishlist
+  3. Shows confirmation
+  4. Icon updates
+<li>**Postconditions**: Product in wishlist</li>
+<li>**Acceptance Criteria**:</li>
+  - Immediate UI update
+  - Database persisted
+  - Icon state change
+  - One click action
+</p><p>
+<h3>FR-6.2: View Wishlist</h3>
+<li>**Description**: Display saved wishlist items</li>
+<li>**Actors**: Authenticated Users</li>
+<li>**Preconditions**: Wishlist items exist</li>
+<li>**Steps**:</li>
+  1. User clicks wishlist
+  2. System fetches items
+  3. Displays product cards
+  4. Shows current prices
+  5. Shows stock status
+<li>**Postconditions**: Wishlist displayed</li>
+<li>**Acceptance Criteria**:</li>
+  - Shows all saved items
+  - Current prices updated
+  - Add to cart option
+  - Remove option
+</p><p>
+<h3>FR-6.3: Remove from Wishlist</h3>
+<li>**Description**: Remove products from wishlist</li>
+<li>**Actors**: Authenticated Users</li>
+<li>**Preconditions**: Items in wishlist</li>
+<li>**Steps**:</li>
+  1. User clicks remove
+  2. System deletes wishlist entry
+  3. Updates UI
+  4. Shows confirmation
+<li>**Postconditions**: Item removed from wishlist</li>
+<li>**Acceptance Criteria**:</li>
+  - Immediate removal
+  - Icon update
+  - Confirmation message
+</p><p>
+---
+</p><p>
+<h2>7. Seller Management</h2>
+</p><p>
+<h3>FR-7.1: Seller Registration</h3>
+<li>**Description**: Allow users to register as sellers</li>
+<li>**Actors**: Users</li>
+<li>**Preconditions**: User account created</li>
+<li>**Steps**:</li>
+  1. User navigates to seller registration
+  2. Provides store information
+  3. Uploads documents
+  4. Submits for approval
+  5. Admin reviews application
+  6. Approval notification sent
+<li>**Postconditions**: Seller account created/pending</li>
+<li>**Acceptance Criteria**:</li>
+  - Document validation
+  - Background check (Phase 2)
+  - Clear approval process
+  - Notification system
+</p><p>
+<h3>FR-7.2: Seller Dashboard</h3>
+<li>**Description**: Seller-specific analytics and management</li>
+<li>**Actors**: Sellers</li>
+<li>**Preconditions**: Seller authenticated</li>
+<li>**Steps**:</li>
+  1. Seller logs in
+  2. System displays dashboard
+  3. Shows sales metrics
+  4. Displays orders
+  5. Shows product analytics
+<li>**Postconditions**: Dashboard displayed</li>
+<li>**Acceptance Criteria**:</li>
+  - Real-time sales data
+  - Order management interface
+  - Product management interface
+  - Analytics charts
+</p><p>
+<h3>FR-7.3: Manage Products</h3>
+<li>**Description**: Sellers can create/edit/delete products</li>
+<li>**Actors**: Sellers</li>
+<li>**Preconditions**: Seller authenticated</li>
+<li>**Steps**:</li>
+  1. Seller navigates to product management
+  2. Creates new product (name, description, price)
+  3. Adds variants and stock
+  4. Uploads product images
+  5. Sets categories and tags
+  6. Publishes product
+<li>**Postconditions**: Product listed</li>
+<li>**Acceptance Criteria**:</li>
+  - Image upload and optimization
+  - Variant management
+  - Stock tracking
+  - Category assignment
+  - SEO fields
+</p><p>
+<h3>FR-7.4: Manage Inventory</h3>
+<li>**Description**: Track and manage product inventory</li>
+<li>**Actors**: Sellers</li>
+<li>**Preconditions**: Products created</li>
+<li>**Steps**:</li>
+  1. Seller views inventory
+  2. Adjusts stock levels
+  3. Sets low stock alerts
+  4. Views stock history
+  5. Manages variants
+<li>**Postconditions**: Inventory updated</li>
+<li>**Acceptance Criteria**:</li>
+  - Real-time stock updates
+  - Bulk operations
+  - Stock alerts
+  - Variant stock tracking
+</p><p>
+---
+</p><p>
+<h2>8. Admin Functions</h2>
+</p><p>
+<h3>FR-8.1: User Management</h3>
+<li>**Description**: Admin can manage users</li>
+<li>**Actors**: Administrators</li>
+<li>**Preconditions**: Admin authenticated</li>
+<li>**Steps**:</li>
+  1. Admin navigates to user management
+  2. Views all users
+  3. Can activate/deactivate accounts
+  4. Can view user details
+  5. Can handle disputes
+<li>**Postconditions**: User status updated</li>
+<li>**Acceptance Criteria**:</li>
+  - User search and filter
+  - Status management
+  - Ban functionality
+  - Activity logs
+</p><p>
+<h3>FR-8.2: Seller Approval</h3>
+<li>**Description**: Review and approve seller applications</li>
+<li>**Actors**: Administrators</li>
+<li>**Preconditions**: Seller applications pending</li>
+<li>**Steps**:</li>
+  1. Admin views applications
+  2. Reviews seller information
+  3. Approves or rejects
+  4. Sends notification
+<li>**Postconditions**: Application processed</li>
+<li>**Acceptance Criteria**:</li>
+  - Application queue
+  - Document verification
+  - Email notification
+  - Approval workflow
+</p><p>
+<h3>FR-8.3: Platform Analytics</h3>
+<li>**Description**: View platform-wide analytics</li>
+<li>**Actors**: Administrators</li>
+<li>**Preconditions**: Admin authenticated</li>
+<li>**Steps**:</li>
+  1. Admin navigates to analytics
+  2. System displays metrics
+  3. Shows sales trends
+  4. Displays user statistics
+  5. Shows system health
+<li>**Postconditions**: Analytics dashboard displayed</li>
+<li>**Acceptance Criteria**:</li>
+  - Real-time data
+  - Customizable reports
+  - Export functionality
+  - Performance metrics
+</p><p>
+---
+</p><p>
+<h2>9. Notification System</h2>
+</p><p>
+<h3>FR-9.1: Real-time Notifications</h3>
+<li>**Description**: Send real-time notifications via WebSocket</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: User authenticated, event triggered</li>
+<li>**Steps**:</li>
+  1. Event occurs (order status, new message, etc)
+  2. System sends notification via Socket.io
+  3. Client receives and displays
+  4. Notification logged
+<li>**Postconditions**: Notification delivered</li>
+<li>**Acceptance Criteria**:</li>
+  - Real-time delivery < 1 second
+  - Multiple notification types
+  - Client-side persistence
+  - Badge updates
+</p><p>
+<h3>FR-9.2: Email Notifications</h3>
+<li>**Description**: Send email notifications for key events</li>
+<li>**Actors**: All Users</li>
+<li>**Preconditions**: Event triggered</li>
+<li>**Steps**:</li>
+  1. Event occurs
+  2. Email queued
+  3. Nodemailer sends email
+  4. Delivery confirmed
+<li>**Postconditions**: Email sent</li>
+<li>**Acceptance Criteria**:</li>
+  - Sent within 5 seconds
+  - Clear formatting
+  - Unsubscribe option (Phase 2)
+  - HTML templates
+</p><p>
+---
+</p><p>
+<h2>Non-Functional Requirements</h2>
+</p><p>
+<h3>NFR-1: Performance</h3>
+<li>Page load time < 2 seconds</li>
+<li>Search response < 500ms</li>
+<li>API response < 200ms (95th percentile)</li>
+<li>WebSocket latency < 100ms</li>
+</p><p>
+<h3>NFR-2: Security</h3>
+<li>All passwords hashed with bcrypt</li>
+<li>HTTPS enforced</li>
+<li>CSRF protection</li>
+<li>XSS protection (input validation)</li>
+<li>Rate limiting (5 requests/min per IP)</li>
+<li>SQL injection prevention</li>
+<li>Secure headers (Helmet.js)</li>
+</p><p>
+<h3>NFR-3: Scalability</h3>
+<li>Support 10,000 concurrent users</li>
+<li>Horizontal scaling capable</li>
+<li>Database indexing optimized</li>
+<li>Caching strategy implemented</li>
+</p><p>
+<h3>NFR-4: Reliability</h3>
+<li>99.9% uptime target</li>
+<li>Automated backups</li>
+<li>Error logging and monitoring</li>
+<li>Graceful error handling</li>
+</p><p>
+<h3>NFR-5: Maintainability</h3>
+<li>Clean code architecture</li>
+<li>Comprehensive documentation</li>
+<li>Unit test coverage > 80%</li>
+<li>Modular component design</li>
+</p><p>
+---
+</p><p>
+**Requirements Document Created**: 2026-06-18
+**Status**: ✅ Complete and Approved for Design Phase
+**Next Step**: System Design and Architecture
+</p><p>
+</body>
+</html>

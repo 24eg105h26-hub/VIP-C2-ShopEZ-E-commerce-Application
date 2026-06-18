@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SYSTEM_DESIGN</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.2;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            background: white;
+        }
+        
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            border-bottom: 2pt solid #003366;
+            padding-bottom: 6pt;
+        }
+        
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            color: #003366;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 9pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+        }
+        
+        p {
+            margin-bottom: 6pt;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 18pt;
+            margin-bottom: 6pt;
+        }
+        
+        li {
+            margin-bottom: 3pt;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 6pt;
+        }
+        
+        th, td {
+            border: 1pt solid #999;
+            padding: 6pt;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2pt 4pt;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+            border-radius: 3pt;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 10pt;
+            border-left: 3pt solid #003366;
+            margin-bottom: 6pt;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+        }
+        
+        blockquote {
+            border-left: 4pt solid #003366;
+            margin-left: 0;
+            padding-left: 10pt;
+            margin-bottom: 6pt;
+            font-style: italic;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 1in;
+            }
+            
+            h1 {
+                page-break-after: avoid;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>ShopEZ - System Design & Architecture</h1>
+</p><p>
+<h2>1. High-Level System Architecture</h2>
+</p><p>
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                        CLIENT LAYER                              │
+├─────────────────────────────────────────────────────────────────┤
+│  React.js (Vite)  │  Redux Toolkit  │  React Query  │ Tailwind  │
+│  - Customer Portal (E-commerce)                                 │
+│  - Seller Dashboard (Inventory Management)                      │
+│  - Admin Panel (System Management)                              │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓↑
+                    HTTPS + WebSocket (Socket.io)
+                              ↓↑
+┌─────────────────────────────────────────────────────────────────┐
+│                       API LAYER (Express.js)                    │
+├─────────────────────────────────────────────────────────────────┤
+│  Routes Layer (API Endpoints)                                   │
+│  ├── /api/auth (Authentication)                                │
+│  ├── /api/products (Product Management)                        │
+│  ├── /api/cart (Shopping Cart)                                │
+│  ├── /api/orders (Order Management)                            │
+│  ├── /api/sellers (Seller Management)                          │
+│  ├── /api/reviews (Reviews & Ratings)                          │
+│  ├── /api/wishlist (Wishlist Management)                       │
+│  ├── /api/admin (Admin Functions)                              │
+│  └── /api/notifications (Notifications)                        │
+│                                                                 │
+│  Middleware Layer                                               │
+│  ├── Authentication (JWT Verification)                         │
+│  ├── Authorization (Role-Based Access Control)                 │
+│  ├── Validation (Input Sanitization)                           │
+│  ├── Error Handling (Centralized)                              │
+│  ├── Logging (Winston)                                         │
+│  └── Rate Limiting (Express Rate Limit)                        │
+│                                                                 │
+│  Service Layer (Business Logic)                                │
+│  ├── Auth Service (JWT, Password Hashing)                      │
+│  ├── Product Service (Search, Filtering)                       │
+│  ├── Order Service (Payment, Inventory)                        │
+│  ├── Notification Service (Email, WebSocket)                   │
+│  ├── Payment Service (Stripe, Razorpay)                        │
+│  └── Email Service (Nodemailer)                                │
+│                                                                 │
+│  Data Access Layer                                              │
+│  └── Mongoose Models (Database Queries)                        │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓↑
+                    MongoDB Connection Pool
+                              ↓↑
+┌─────────────────────────────────────────────────────────────────┐
+│                    DATA PERSISTENCE LAYER                        │
+├─────────────────────────────────────────────────────────────────┤
+│  MongoDB Atlas (Cloud Database)                                 │
+│  ├── Collections:                                               │
+│  │   ├── users (Customers, Sellers, Admins)                    │
+│  │   ├── products (Product Catalog)                            │
+│  │   ├── variants (Product Variants)                           │
+│  │   ├── categories (Product Categories)                       │
+│  │   ├── orders (Order Records)                                │
+│  │   ├── carts (Shopping Carts)                                │
+│  │   ├── reviews (Product Reviews)                             │
+│  │   ├── wishlists (Wishlist Items)                            │
+│  │   ├── notifications (User Notifications)                    │
+│  │   ├── coupons (Promotional Coupons)                         │
+│  │   └── transactions (Payment Records)                        │
+│  └── Indexes:                                                   │
+│      ├── Text Search (Products)                                │
+│      ├── Compound Indexes (Category + Seller)                  │
+│      └── TTL Indexes (Sessions, Tokens)                        │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓↑
+┌─────────────────────────────────────────────────────────────────┐
+│                  EXTERNAL SERVICES LAYER                         │
+├─────────────────────────────────────────────────────────────────┤
+│  ┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐ │
+│  │ Payment Gateway │  │ Cloud Storage   │  │  Email Service  │ │
+│  ├─────────────────┤  ├─────────────────┤  ├─────────────────┤ │
+│  │ - Stripe        │  │ - Cloudinary    │  │ - Nodemailer    │ │
+│  │ - Razorpay      │  │   (Images)      │  │ - Gmail/Outlook │ │
+│  │ - Webhooks      │  │   (CDN)         │  │ - Templates     │ │
+│  └─────────────────┘  └─────────────────┘  └─────────────────┘ │
+│                                                                 │
+│  ┌──────────────────────────┐    ┌──────────────────────────┐  │
+│  │  Real-time Communication │    │ Monitoring & Analytics   │  │
+│  ├──────────────────────────┤    ├──────────────────────────┤  │
+│  │ - Socket.io              │    │ - Winston Logger         │  │
+│  │ - Namespace Isolation    │    │ - Error Tracking (Sentry)│  │
+│  │ - Event-driven Updates   │    │ - Performance APM        │  │
+│  └──────────────────────────┘    └──────────────────────────┘  │
+└─────────────────────────────────────────────────────────────────┘
+```
+</p><p>
+---
+</p><p>
+<h2>2. Component Architecture</h2>
+</p><p>
+<h3>Frontend Components</h3>
+</p><p>
+#### Customer Portal Structure
+```
+App.jsx (Main Component)
+├── Layout Components
+│   ├── Header (Navigation, Search, Cart Icon)
+│   ├── Sidebar (Categories, Filters)
+│   └── Footer (Links, Info)
+├── Auth Pages
+│   ├── LoginPage
+│   ├── SignupPage
+│   ├── VerifyEmailPage
+│   └── ForgotPasswordPage
+├── Product Pages
+│   ├── HomePage (Featured Products)
+│   ├── ProductListPage (with Filters)
+│   ├── ProductDetailPage (Images, Variants, Reviews)
+│   └── SearchResultsPage
+├── Shopping Pages
+│   ├── CartPage (Cart Items, Summary)
+│   ├── CheckoutPage (Shipping, Payment)
+│   ├── OrderConfirmationPage
+│   └── OrderTrackingPage
+├── User Pages
+│   ├── ProfilePage (User Info)
+│   ├── OrderHistoryPage
+│   ├── WishlistPage
+│   └── ReviewsPage
+└── Common Components
+    ├── ProductCard (Reusable)
+    ├── ReviewSection (Reusable)
+    ├── NotificationBanner
+    └── LoadingSkeletons
+```
+</p><p>
+#### Seller Portal Structure
+```
+SellerApp.jsx
+├── Dashboard (Overview, Analytics)
+├── Products Management
+│   ├── ProductList (with Filters)
+│   ├── AddProduct Form
+│   ├── EditProduct Form
+│   └── ProductVariants Management
+├── Inventory Management
+│   ├── InventoryList
+│   ├── StockAdjustment
+│   └── Low Stock Alerts
+├── Orders Management
+│   ├── OrdersList (Filterable)
+│   ├── OrderDetails (Status, Items)
+│   └── OrderActions (Ship, Cancel)
+├── Analytics
+│   ├── SalesChart
+│   ├── RevenueMetrics
+│   ├── TopProducts
+│   └── CustomerReviews
+└── Settings
+    ├── Store Profile
+    ├── Bank Details
+    └── Notifications Preferences
+```
+</p><p>
+#### Admin Portal Structure
+```
+AdminApp.jsx
+├── Dashboard (System Overview)
+├── Users Management
+│   ├── UsersList (Search, Filter)
+│   ├── UserDetails
+│   ├── BanUser Action
+│   └── UserActivity Logs
+├── Sellers Management
+│   ├── PendingApplications
+│   ├── ApprovedSellers
+│   ├── SellerDetails
+│   └── DisputeResolution
+├── Orders Management
+│   ├── AllOrders (Global View)
+│   ├── OrderDetails
+│   └── Refund Management
+├── Products Management
+│   ├── AllProducts (Moderation)
+│   ├── FlaggedProducts
+│   └── CategoryManagement
+├── Analytics & Reports
+│   ├── SalesAnalytics
+│   ├── UserMetrics
+│   ├── PaymentAnalytics
+│   └── ReportGeneration
+└── System Settings
+    ├── Commission Management
+    ├── Payment Gateway Config
+    ├── Email Templates
+    └── Security Settings
+```
+</p><p>
+---
+</p><p>
+<h2>3. Database Schema Design</h2>
+</p><p>
+<h3>Collection: users</h3>
+```javascript
+{
+  _id: ObjectId,
+  email: String (unique, indexed),
+  password: String (bcrypt hashed),
+  name: String,
+  role: String (enum: ['customer', 'seller', 'admin']),
+  phone: String,
+  avatar: String (Cloudinary URL),
+  verified: Boolean,
+  emailVerificationToken: String (expires),
+</p><p>
+  // Profile Info
+  profile: {
+    firstName: String,
+    lastName: String,
+    dateOfBirth: Date,
+    gender: String (enum: ['M', 'F', 'Other']),
+    bio: String,
+    address: {
+      street: String,
+      city: String,
+      state: String,
+      postalCode: String,
+      country: String
+    }
+  },
+</p><p>
+  // Seller Specific
+  seller: {
+    storeName: String,
+    storeDescription: String,
+    storeImage: String,
+    verified: Boolean,
+    approvalDate: Date,
+    commissionRate: Number,
+    bankDetails: {
+      accountHolder: String,
+      accountNumber: String (encrypted),
+      routingNumber: String (encrypted)
+    },
+    totalSales: Number,
+    totalRevenue: Decimal,
+    rating: Decimal,
+    reviewCount: Number
+  },
+</p><p>
+  // Account Status
+  isActive: Boolean,
+  isBanned: Boolean,
+  banReason: String,
+  lastLogin: Date,
+  loginAttempts: Number,
+  lockUntil: Date,
+</p><p>
+  // Security
+  refreshTokens: [String],
+  ipWhitelist: [String],
+</p><p>
+  timestamps: {
+    createdAt: Date,
+    updatedAt: Date,
+    deletedAt: Date (soft delete)
+  }
+}
+```
+</p><p>
+<h3>Collection: products</h3>
+```javascript
+{
+  _id: ObjectId,
+</p><p>
+  // Basic Info
+  name: String (indexed, text search),
+  slug: String (indexed, unique),
+  description: String (text search),
+</p><p>
+  // Classification
+  category: ObjectId (ref: 'Category'),
+  subCategory: ObjectId (ref: 'Category'),
+  tags: [String] (indexed),
+</p><p>
+  // Seller Info
+  seller: ObjectId (ref: 'User'),
+</p><p>
+  // Media
+  images: [{
+    url: String (Cloudinary),
+    alt: String,
+    position: Number
+  }],
+</p><p>
+  // Pricing
+  basePrice: Decimal,
+  maxPrice: Decimal,
+  minPrice: Decimal,
+</p><p>
+  // Variants
+  variants: [{
+    _id: ObjectId,
+    name: String (e.g., 'Size'),
+    options: [String] (e.g., ['S', 'M', 'L']),
+    priceModifier: Decimal,
+    sku: String (unique across variants)
+  }],
+</p><p>
+  // Inventory
+  inventory: [{
+    variantId: ObjectId,
+    quantity: Number,
+    reserved: Number (during checkout),
+    sku: String,
+    barcode: String
+  }],
+</p><p>
+  // Ratings & Reviews
+  averageRating: Decimal (0-5),
+  totalReviews: Number,
+  ratingBreakdown: {
+    five: Number,
+    four: Number,
+    three: Number,
+    two: Number,
+    one: Number
+  },
+</p><p>
+  // Product Status
+  status: String (enum: ['active', 'inactive', 'flagged']),
+  publishedAt: Date,
+</p><p>
+  // Metadata
+  specifications: [{
+    key: String,
+    value: String
+  }],
+  returnPolicy: String,
+  warranty: String,
+</p><p>
+  timestamps: {
+    createdAt: Date,
+    updatedAt: Date
+  },
+</p><p>
+  // Indexes
+  // - text index on name, description
+  // - compound index on (category, seller, status)
+  // - index on slug
+}
+```
+</p><p>
+<h3>Collection: orders</h3>
+```javascript
+{
+  _id: ObjectId,
+</p><p>
+  // Order Identification
+  orderNumber: String (unique, indexed),
+  customer: ObjectId (ref: 'User', indexed),
+</p><p>
+  // Items
+  items: [{
+    product: ObjectId (ref: 'Product'),
+    seller: ObjectId (ref: 'User'),
+    variant: {
+      name: String,
+      option: String
+    },
+    quantity: Number,
+    pricePerUnit: Decimal,
+    subtotal: Decimal
+  }],
+</p><p>
+  // Pricing
+  subtotal: Decimal,
+  tax: Decimal,
+  shipping: Decimal,
+  discount: {
+    couponCode: String,
+    amount: Decimal
+  },
+  total: Decimal,
+</p><p>
+  // Shipping
+  shippingAddress: {
+    name: String,
+    phone: String,
+    street: String,
+    city: String,
+    state: String,
+    postalCode: String,
+    country: String
+  },
+  shippingMethod: String (enum: ['standard', 'express', 'overnight']),
+  trackingNumber: String,
+  estimatedDelivery: Date,
+</p><p>
+  // Order Status
+  status: String (enum: ['pending', 'confirmed', 'processing', 'shipped', 'delivered', 'cancelled']),
+  statusHistory: [{
+    status: String,
+    timestamp: Date,
+    note: String
+  }],
+</p><p>
+  // Payment
+  payment: {
+    method: String (enum: ['stripe', 'razorpay', 'wallet']),
+    transactionId: String (indexed),
+    amount: Decimal,
+    status: String (enum: ['pending', 'completed', 'failed', 'refunded']),
+    paidAt: Date,
+    refundAmount: Decimal,
+    refundStatus: String,
+    refundDate: Date
+  },
+</p><p>
+  // Notes
+  customerNotes: String,
+  internalNotes: String,
+</p><p>
+  timestamps: {
+    createdAt: Date,
+    updatedAt: Date
+  }
+}
+```
+</p><p>
+<h3>Collection: reviews</h3>
+```javascript
+{
+  _id: ObjectId,
+  product: ObjectId (ref: 'Product', indexed),
+  customer: ObjectId (ref: 'User', indexed),
+  order: ObjectId (ref: 'Order'),
+</p><p>
+  rating: Number (enum: [1, 2, 3, 4, 5], indexed),
+  title: String,
+  content: String,
+</p><p>
+  // Engagement
+  helpful: Number,
+  unhelpful: Number,
+  verified: Boolean (purchased product),
+</p><p>
+  timestamps: {
+    createdAt: Date,
+    updatedAt: Date
+  }
+}
+```
+</p><p>
+---
+</p><p>
+<h2>4. API Design</h2>
+</p><p>
+<h3>Authentication Endpoints</h3>
+</p><p>
+#### POST /api/auth/register
+```
+Request Body:
+{
+  email: "user@example.com",
+  password: "securePassword123",
+  name: "John Doe",
+  role: "customer" // or "seller"
+}
+</p><p>
+Response (201):
+{
+  success: true,
+  message: "Registration successful. Check your email.",
+  user: {
+    id: "userId",
+    email: "user@example.com",
+    role: "customer"
+  }
+}
+```
+</p><p>
+#### POST /api/auth/login
+```
+Request Body:
+{
+  email: "user@example.com",
+  password: "securePassword123"
+}
+</p><p>
+Response (200):
+{
+  success: true,
+  accessToken: "jwt_token",
+  refreshToken: "refresh_token",
+  user: {
+    id: "userId",
+    email: "user@example.com",
+    role: "customer",
+    name: "John Doe"
+  }
+}
+</p><p>
+Headers Set:
+<li>Set-Cookie: accessToken=...; HttpOnly; Secure; SameSite=Strict</li>
+<li>Set-Cookie: refreshToken=...; HttpOnly; Secure; SameSite=Strict</li>
+```
+</p><p>
+#### POST /api/auth/refresh
+```
+Request Header:
+<li>Cookie: refreshToken=...</li>
+</p><p>
+Response (200):
+{
+  accessToken: "new_jwt_token",
+  refreshToken: "new_refresh_token"
+}
+```
+</p><p>
+#### POST /api/auth/logout
+```
+Response (200):
+{
+  success: true,
+  message: "Logged out successfully"
+}
+```
+</p><p>
+<h3>Product Endpoints</h3>
+</p><p>
+#### GET /api/products
+```
+Query Parameters:
+<li>page: number (default: 1)</li>
+<li>limit: number (default: 20, max: 100)</li>
+<li>search: string</li>
+<li>category: string (ObjectId)</li>
+<li>minPrice: number</li>
+<li>maxPrice: number</li>
+<li>rating: number (min rating)</li>
+<li>sort: string (price_asc, price_desc, newest, popular)</li>
+</p><p>
+Response (200):
+{
+  success: true,
+  data: [
+    {
+      _id: "productId",
+      name: "Product Name",
+      price: 99.99,
+      image: "url",
+      averageRating: 4.5,
+      totalReviews: 120,
+      seller: { _id: "sellerId", storeName: "Store" }
+    }
+  ],
+  pagination: {
+    total: 500,
+    page: 1,
+    limit: 20,
+    pages: 25
+  }
+}
+```
+</p><p>
+#### GET /api/products/:id
+```
+Response (200):
+{
+  success: true,
+  data: {
+    _id: "productId",
+    name: "Product Name",
+    description: "...",
+    category: { _id: "catId", name: "Category" },
+    seller: { _id: "sellerId", storeName: "Store", rating: 4.8 },
+    price: 99.99,
+    images: [{ url: "...", alt: "..." }],
+    variants: [
+      {
+        name: "Size",
+        options: ["S", "M", "L", "XL"],
+        priceModifier: 0
+      }
+    ],
+    inventory: [
+      {
+        variantId: "varId",
+        sku: "SKU123",
+        quantity: 50,
+        available: 45
+      }
+    ],
+    averageRating: 4.5,
+    reviews: [
+      {
+        _id: "reviewId",
+        rating: 5,
+        title: "Great product!",
+        content: "...",
+        customer: { name: "John Doe" },
+        createdAt: "2026-06-18T..."
+      }
+    ]
+  }
+}
+```
+</p><p>
+<h3>Order Endpoints</h3>
+</p><p>
+#### POST /api/orders/checkout
+```
+Request Body:
+{
+  items: [
+    {
+      productId: "productId",
+      variantId: "variantId",
+      quantity: 2
+    }
+  ],
+  shippingAddress: {
+    name: "John Doe",
+    phone: "+1234567890",
+    street: "123 Main St",
+    city: "City",
+    state: "State",
+    postalCode: "12345",
+    country: "Country"
+  },
+  shippingMethod: "standard",
+  paymentMethod: "stripe"
+}
+</p><p>
+Response (200):
+{
+  success: true,
+  clientSecret: "pi_1234567890", // For Stripe
+  order: {
+    _id: "orderId",
+    orderNumber: "ORD-123456",
+    total: 299.97,
+    items: [...]
+  }
+}
+```
+</p><p>
+#### GET /api/orders
+```
+Query Parameters:
+<li>page: number</li>
+<li>limit: number</li>
+<li>status: string</li>
+</p><p>
+Response (200):
+{
+  success: true,
+  data: [
+    {
+      _id: "orderId",
+      orderNumber: "ORD-123456",
+      status: "shipped",
+      total: 299.97,
+      createdAt: "2026-06-18T...",
+      estimatedDelivery: "2026-06-25T..."
+    }
+  ]
+}
+```
+</p><p>
+#### GET /api/orders/:id
+```
+Response (200):
+{
+  success: true,
+  data: {
+    _id: "orderId",
+    orderNumber: "ORD-123456",
+    customer: {...},
+    items: [...],
+    status: "shipped",
+    statusHistory: [...],
+    shippingAddress: {...},
+    trackingNumber: "TRK123456",
+    estimatedDelivery: "2026-06-25T...",
+    payment: {...},
+    total: 299.97
+  }
+}
+```
+</p><p>
+---
+</p><p>
+<h2>5. Security Architecture</h2>
+</p><p>
+<h3>Authentication Flow</h3>
+```
+1. User submits credentials
+   ↓
+2. Express validates input
+   ↓
+3. Query user from DB
+   ↓
+4. bcryptjs compares passwords
+   ↓
+5. JWT creates tokens (15 min + 7 days)
+   ↓
+6. Tokens stored in HttpOnly cookies
+   ↓
+7. Response with user data
+```
+</p><p>
+<h3>Authorization Flow</h3>
+```
+1. Request with access token (cookie)
+   ↓
+2. Middleware extracts token
+   ↓
+3. JWT verifies signature
+   ↓
+4. Extract user ID and role
+   ↓
+5. Check role-based permissions
+   ↓
+6. Allow or deny request
+```
+</p><p>
+<h3>Refresh Token Rotation</h3>
+```
+1. Client sends refresh token
+   ↓
+2. Verify refresh token exists in DB
+   ↓
+3. Check if token matches stored hash
+   ↓
+4. Generate new token pair
+   ↓
+5. Invalidate old refresh token
+   ↓
+6. Store new refresh token
+   ↓
+7. Return new tokens
+```
+</p><p>
+<h3>Rate Limiting</h3>
+```
+<li>Auth endpoints: 5 requests/minute per IP</li>
+<li>API endpoints: 100 requests/minute per user</li>
+<li>Search: 50 requests/minute per IP</li>
+<li>Uploads: 10 requests/minute per user</li>
+```
+</p><p>
+---
+</p><p>
+<h2>6. Error Handling Strategy</h2>
+</p><p>
+<h3>Centralized Error Handler</h3>
+```javascript
+const errorHandler = (err, req, res, next) => {
+  // Log error
+  logger.error(err);
+</p><p>
+  // Determine error type
+  let status = err.statusCode || 500;
+  let message = err.message || 'Internal Server Error';
+</p><p>
+  // Send consistent error response
+  res.status(status).json({
+    success: false,
+    error: {
+      code: err.code || 'INTERNAL_ERROR',
+      message: message,
+      details: process.env.NODE_ENV === 'development' ? err.stack : undefined
+    }
+  });
+};
+```
+</p><p>
+<h3>Error Types</h3>
+<li>**400**: Bad Request (validation error)</li>
+<li>**401**: Unauthorized (auth required)</li>
+<li>**403**: Forbidden (permission denied)</li>
+<li>**404**: Not Found (resource doesn't exist)</li>
+<li>**409**: Conflict (duplicate entry)</li>
+<li>**422**: Unprocessable Entity (validation failed)</li>
+<li>**500**: Internal Server Error (server error)</li>
+</p><p>
+---
+</p><p>
+<h2>7. Performance Considerations</h2>
+</p><p>
+<h3>Database Optimization</h3>
+<li>Text indexes on searchable fields</li>
+<li>Compound indexes for common queries</li>
+<li>Field projection to limit data transfer</li>
+<li>Connection pooling</li>
+<li>Query result caching (Phase 2)</li>
+</p><p>
+<h3>Frontend Optimization</h3>
+<li>Code splitting by route</li>
+<li>Image optimization via Cloudinary</li>
+<li>Lazy loading components</li>
+<li>Virtual scrolling for lists</li>
+<li>Memoization of expensive computations</li>
+</p><p>
+<h3>API Optimization</h3>
+<li>Response compression (gzip)</li>
+<li>Pagination for large datasets</li>
+<li>Selective field return</li>
+<li>Request validation early</li>
+<li>Rate limiting</li>
+</p><p>
+---
+</p><p>
+<h2>8. Deployment Architecture</h2>
+</p><p>
+<h3>Environment Separation</h3>
+```
+Development
+├── Local MongoDB
+├── Localhost servers
+└── Test payment gateways
+</p><p>
+Staging
+├── MongoDB Atlas (staging)
+├── AWS EC2 instances
+└── Sandbox payment gateways
+</p><p>
+Production
+├── MongoDB Atlas (production)
+├── AWS Load Balancer
+├── Auto-scaling groups
+└── Live payment gateways
+```
+</p><p>
+---
+</p><p>
+**System Design Created**: 2026-06-18  
+**Status**: ✅ Approved for Implementation  
+**Next Phase**: Development & Coding
+</p><p>
+</body>
+</html>

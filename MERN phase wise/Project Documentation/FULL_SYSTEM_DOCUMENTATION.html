@@ -1,0 +1,969 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FULL_SYSTEM_DOCUMENTATION</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.2;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            background: white;
+        }
+        
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            border-bottom: 2pt solid #003366;
+            padding-bottom: 6pt;
+        }
+        
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            color: #003366;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 9pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+        }
+        
+        p {
+            margin-bottom: 6pt;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 18pt;
+            margin-bottom: 6pt;
+        }
+        
+        li {
+            margin-bottom: 3pt;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 6pt;
+        }
+        
+        th, td {
+            border: 1pt solid #999;
+            padding: 6pt;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2pt 4pt;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+            border-radius: 3pt;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 10pt;
+            border-left: 3pt solid #003366;
+            margin-bottom: 6pt;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+        }
+        
+        blockquote {
+            border-left: 4pt solid #003366;
+            margin-left: 0;
+            padding-left: 10pt;
+            margin-bottom: 6pt;
+            font-style: italic;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 1in;
+            }
+            
+            h1 {
+                page-break-after: avoid;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>ShopEZ - Full System Documentation</h1>
+</p><p>
+<h2>Executive Summary</h2>
+</p><p>
+**Project**: ShopEZ - B2C E-Commerce Marketplace  
+**Version**: 1.0.0  
+**Status**: Development Phase  
+**Last Updated**: 2026-06-18  
+</p><p>
+ShopEZ is a production-ready, fully isolated B2C e-commerce marketplace built with the MERN stack (MongoDB, Express.js, React.js, Node.js). The platform features separate portals for Customers, Sellers, and Administrators with enterprise-grade security, real-time notifications, and multiple payment gateway integration.
+</p><p>
+---
+</p><p>
+<h2>Table of Contents</h2>
+</p><p>
+1. [System Overview](#system-overview)
+2. [Architecture](#architecture)
+3. [Technology Stack](#technology-stack)
+4. [Database Design](#database-design)
+5. [API Documentation](#api-documentation)
+6. [Frontend Components](#frontend-components)
+7. [Deployment](#deployment)
+8. [Security](#security)
+9. [Performance](#performance)
+10. [Troubleshooting](#troubleshooting)
+</p><p>
+---
+</p><p>
+<h2>System Overview</h2>
+</p><p>
+<h3>Key Features</h3>
+</p><p>
+#### Customer Portal
+<li>Browse and search products with advanced filters</li>
+<li>Product variant selection (size, color, specifications)</li>
+<li>Shopping cart management with real-time updates</li>
+<li>Secure checkout with multiple payment options (Stripe, Razorpay)</li>
+<li>Order tracking with real-time status updates</li>
+<li>Product reviews and ratings</li>
+<li>Wishlist management</li>
+<li>User profile and order history</li>
+<li>Email notifications for order updates</li>
+<li>Real-time WebSocket notifications</li>
+</p><p>
+#### Seller Portal
+<li>Seller registration and approval workflow</li>
+<li>Product management with variant support</li>
+<li>Inventory tracking with stock warnings</li>
+<li>Order management and fulfillment</li>
+<li>Sales analytics and revenue metrics</li>
+<li>Customer review management</li>
+<li>Store customization and branding</li>
+<li>Real-time sales notifications</li>
+</p><p>
+#### Admin Portal
+<li>User account management and moderation</li>
+<li>Seller application review and approval</li>
+<li>Product moderation and flagging</li>
+<li>Global order management</li>
+<li>Platform analytics and reporting</li>
+<li>Commission rate management</li>
+<li>Payment gateway configuration</li>
+<li>System health monitoring</li>
+<li>Dispute resolution tools</li>
+</p><p>
+<h3>Core Capabilities</h3>
+</p><p>
+| Feature | Status | Details |
+|---------|--------|---------|
+| User Authentication | ✅ Complete | JWT with RTR, email verification |
+| Product Catalog | ✅ Complete | Full-text search, variants, inventory |
+| Shopping Cart | ✅ Complete | Real-time sync, inventory locking |
+| Checkout Process | ✅ Complete | Multiple payment methods, webhooks |
+| Order Management | ✅ Complete | Status tracking, refunds, history |
+| Reviews & Ratings | ✅ Complete | Verified buyer reviews, average ratings |
+| Real-time Notifications | ✅ Complete | WebSocket via Socket.io |
+| Email Notifications | ✅ Complete | Transactional emails via Nodemailer |
+| Admin Dashboard | ✅ Complete | Analytics, user management, moderation |
+| Seller Dashboard | ✅ Complete | Inventory, orders, analytics |
+</p><p>
+---
+</p><p>
+<h2>Architecture</h2>
+</p><p>
+<h3>System Architecture Diagram</h3>
+</p><p>
+```
+┌─────────────────────────────────────────────────────────────────┐
+│                   FRONTEND LAYER (React.js)                      │
+│  Customer Portal │ Seller Portal │ Admin Portal │ Common Layout  │
+└─────────────────────────────────────────────────────────────────┘
+                 ↓ HTTPS + WebSocket ↑
+┌─────────────────────────────────────────────────────────────────┐
+│                  API LAYER (Express.js)                          │
+│  Routes → Controllers → Services → Models → Mongoose             │
+│  Middleware: Auth, Validation, Error Handling, Logging           │
+└─────────────────────────────────────────────────────────────────┘
+                 ↓ MongoDB Connection ↑
+┌─────────────────────────────────────────────────────────────────┐
+│                DATABASE LAYER (MongoDB)                          │
+│  Collections: users, products, orders, reviews, notifications    │
+│  Indexes: Text search, compound, TTL                             │
+└─────────────────────────────────────────────────────────────────┘
+                          ↓↑
+┌─────────────────────────────────────────────────────────────────┐
+│              EXTERNAL SERVICES LAYER                             │
+│  Stripe │ Razorpay │ Cloudinary │ Nodemailer │ Socket.io        │
+└─────────────────────────────────────────────────────────────────┘
+```
+</p><p>
+<h3>Data Flow</h3>
+</p><p>
+#### User Registration Flow
+```
+User Input → Validation → Hash Password → Create User Record 
+→ Send Verification Email → Store in DB → Response
+```
+</p><p>
+#### Product Search Flow
+```
+Search Query → Validate Input → Full-text Search (MongoDB) 
+→ Apply Filters → Pagination → Return Results → Cache (React Query)
+```
+</p><p>
+#### Order Processing Flow
+```
+Checkout → Validate Inventory → Lock Stock → Create Order Record 
+→ Process Payment → Confirm with Payment Gateway → Send Email 
+→ Notify Seller (WebSocket) → Clear Cart
+```
+</p><p>
+#### Real-time Notification Flow
+```
+Event (Order Update) → Server Process → Emit via Socket.io 
+→ Client Receive → Redux Update → UI Re-render → Display Notification
+```
+</p><p>
+---
+</p><p>
+<h2>Technology Stack</h2>
+</p><p>
+<h3>Backend Technologies</h3>
+</p><p>
+#### Runtime & Framework
+<li>**Node.js** v18+ - JavaScript runtime</li>
+<li>**Express.js** v4.19.2 - Web framework</li>
+<li>**Mongoose** v8.4.1 - MongoDB ODM</li>
+</p><p>
+#### Database
+<li>**MongoDB Atlas** - Cloud database</li>
+<li>**Mongoose Schemas** - Data validation</li>
+<li>**Aggregation Pipeline** - Complex queries</li>
+</p><p>
+#### Authentication & Security
+<li>**JWT** (jsonwebtoken) - Token-based auth</li>
+<li>**bcryptjs** - Password hashing</li>
+<li>**Helmet.js** - Security headers</li>
+<li>**express-validator** - Input validation</li>
+<li>**express-rate-limit** - Rate limiting</li>
+<li>**dotenv** - Environment variables</li>
+</p><p>
+#### Real-time Communication
+<li>**Socket.io** - WebSocket communication</li>
+<li>**Socket.io Namespaces** - Namespace isolation</li>
+</p><p>
+#### Payment Processing
+<li>**Stripe** - Primary payment processor</li>
+<li>**Razorpay** - Alternative processor (India)</li>
+<li>**Webhook Verification** - Secure callbacks</li>
+</p><p>
+#### File & Image Management
+<li>**Cloudinary** - Image hosting and CDN</li>
+<li>**Multer** - File upload handling (Phase 2)</li>
+</p><p>
+#### Email Service
+<li>**Nodemailer** - Email delivery</li>
+<li>**HTML Templates** - Email formatting</li>
+</p><p>
+#### Logging & Monitoring
+<li>**Winston** - Structured logging</li>
+<li>**Morgan** - HTTP request logging</li>
+<li>**Sentry** - Error tracking (Phase 2)</li>
+</p><p>
+#### Testing
+<li>**Jest** - Unit testing framework</li>
+<li>**Supertest** - HTTP assertion</li>
+<li>**mongodb-memory-server** - In-memory DB testing</li>
+</p><p>
+<h3>Frontend Technologies</h3>
+</p><p>
+#### Framework & Build
+<li>**React** v18.3.1 - UI framework</li>
+<li>**Vite** v5.2.11 - Build tool</li>
+<li>**React Router** v6.23.1 - Routing</li>
+</p><p>
+#### State Management
+<li>**Redux Toolkit** v2.2.5 - Global state</li>
+<li>**React Query** v5.45.0 - Server state caching</li>
+<li>**Axios** v1.7.2 - HTTP client</li>
+</p><p>
+#### Styling & UI
+<li>**Tailwind CSS** v3.4.4 - Utility CSS</li>
+<li>**Framer Motion** v11.2.10 - Animations</li>
+<li>**Lucide React** v0.395.0 - Icons</li>
+<li>**PostCSS** - CSS processing</li>
+</p><p>
+#### Real-time Communication
+<li>**Socket.io-client** v4.7.5 - WebSocket client</li>
+</p><p>
+#### Development & Testing
+<li>**ESLint** - Code quality</li>
+<li>**Prettier** - Code formatting (Phase 2)</li>
+<li>**Jest** - Component testing</li>
+<li>**React Testing Library** - UI testing</li>
+</p><p>
+---
+</p><p>
+<h2>Database Design</h2>
+</p><p>
+<h3>Collections Overview</h3>
+</p><p>
+#### Users Collection
+```javascript
+{
+  _id: ObjectId,
+  email: String (unique, indexed),
+  password: String (hashed),
+  name: String,
+  role: String (customer/seller/admin),
+  profile: {
+    avatar: String (Cloudinary URL),
+    address: { street, city, state, postalCode, country },
+    phone: String
+  },
+  seller: { // Only for sellers
+    storeName: String,
+    storeDescription: String,
+    verified: Boolean,
+    rating: Decimal,
+    totalSales: Number,
+    bankDetails: { accountNumber, routingNumber } // Encrypted
+  },
+  isActive: Boolean,
+  isBanned: Boolean,
+  refreshTokens: [String], // Token blacklist
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+</p><p>
+#### Products Collection
+```javascript
+{
+  _id: ObjectId,
+  name: String (indexed, text search),
+  slug: String (indexed),
+  description: String,
+  category: ObjectId (ref: Category),
+  seller: ObjectId (ref: User),
+  basePrice: Decimal,
+  images: [{ url: String, alt: String }],
+  variants: [{
+    name: String,
+    options: [String],
+    priceModifier: Decimal
+  }],
+  inventory: [{
+    variantId: ObjectId,
+    quantity: Number,
+    reserved: Number
+  }],
+  averageRating: Decimal,
+  totalReviews: Number,
+  status: String (active/inactive/flagged),
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+</p><p>
+#### Orders Collection
+```javascript
+{
+  _id: ObjectId,
+  orderNumber: String (unique, indexed),
+  customer: ObjectId (ref: User),
+  items: [{
+    product: ObjectId,
+    variant: { name, option },
+    quantity: Number,
+    pricePerUnit: Decimal
+  }],
+  total: Decimal,
+  status: String (pending/confirmed/shipped/delivered),
+  statusHistory: [{ status, timestamp, note }],
+  payment: {
+    method: String (stripe/razorpay),
+    transactionId: String (indexed),
+    status: String,
+    paidAt: Date
+  },
+  shippingAddress: { name, street, city, state, postalCode },
+  trackingNumber: String,
+  estimatedDelivery: Date,
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+</p><p>
+#### Reviews Collection
+```javascript
+{
+  _id: ObjectId,
+  product: ObjectId (ref: Product, indexed),
+  customer: ObjectId (ref: User),
+  order: ObjectId (ref: Order),
+  rating: Number (1-5),
+  title: String,
+  content: String,
+  verified: Boolean (purchased product),
+  helpful: Number,
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+</p><p>
+<h3>Indexes</h3>
+<li>Text index on `products.name` and `products.description`</li>
+<li>Compound index on `products` (category, seller, status)</li>
+<li>Unique index on `users.email` and `products.slug`</li>
+<li>Index on `orders.orderNumber` and `orders.customer`</li>
+<li>Index on `reviews.product` and `reviews.customer`</li>
+</p><p>
+---
+</p><p>
+<h2>API Documentation</h2>
+</p><p>
+<h3>Base URL</h3>
+```
+Development: http://localhost:5000/api
+Production: https://api.shopez.com/api
+```
+</p><p>
+<h3>Authentication Endpoints</h3>
+</p><p>
+#### Register
+```
+POST /auth/register
+Content-Type: application/json
+</p><p>
+Request:
+{
+  email: "user@example.com",
+  password: "SecurePass123!",
+  name: "John Doe",
+  role: "customer"
+}
+</p><p>
+Response (201):
+{
+  success: true,
+  message: "Registration successful. Check your email.",
+  user: {
+    id: "userId",
+    email: "user@example.com",
+    role: "customer"
+  }
+}
+```
+</p><p>
+#### Login
+```
+POST /auth/login
+Content-Type: application/json
+</p><p>
+Request:
+{
+  email: "user@example.com",
+  password: "SecurePass123!"
+}
+</p><p>
+Response (200):
+{
+  success: true,
+  accessToken: "jwt_token",
+  user: {
+    id: "userId",
+    email: "user@example.com",
+    role: "customer",
+    name: "John Doe"
+  }
+}
+</p><p>
+Headers Set:
+<li>Set-Cookie: accessToken=...; HttpOnly; Secure; SameSite=Strict</li>
+<li>Set-Cookie: refreshToken=...; HttpOnly; Secure; SameSite=Strict</li>
+```
+</p><p>
+#### Refresh Token
+```
+POST /auth/refresh
+Headers:
+<li>Cookie: refreshToken=...</li>
+</p><p>
+Response (200):
+{
+  accessToken: "new_jwt_token",
+  refreshToken: "new_refresh_token"
+}
+```
+</p><p>
+#### Logout
+```
+POST /auth/logout
+Headers:
+<li>Authorization: Bearer {accessToken}</li>
+</p><p>
+Response (200):
+{
+  success: true,
+  message: "Logged out successfully"
+}
+```
+</p><p>
+<h3>Product Endpoints</h3>
+</p><p>
+#### List Products
+```
+GET /products
+Query Parameters:
+<li>page: number (default: 1)</li>
+<li>limit: number (default: 20, max: 100)</li>
+<li>search: string</li>
+<li>category: string (ObjectId)</li>
+<li>minPrice: number</li>
+<li>maxPrice: number</li>
+<li>rating: number (min rating)</li>
+<li>sort: string (price_asc, price_desc, newest, popular)</li>
+</p><p>
+Response (200):
+{
+  success: true,
+  data: [
+    {
+      _id: "productId",
+      name: "Product Name",
+      price: 99.99,
+      image: "url",
+      averageRating: 4.5,
+      totalReviews: 120
+    }
+  ],
+  pagination: {
+    total: 500,
+    page: 1,
+    limit: 20
+  }
+}
+```
+</p><p>
+#### Get Product Details
+```
+GET /products/:id
+</p><p>
+Response (200):
+{
+  success: true,
+  data: {
+    _id: "productId",
+    name: "Product Name",
+    description: "...",
+    price: 99.99,
+    images: [...],
+    variants: [...],
+    inventory: [...],
+    reviews: [...],
+    seller: { _id, storeName, rating }
+  }
+}
+```
+</p><p>
+<h3>Order Endpoints</h3>
+</p><p>
+#### Create Order (Checkout)
+```
+POST /orders/checkout
+Headers:
+<li>Authorization: Bearer {accessToken}</li>
+</p><p>
+Request:
+{
+  items: [
+    {
+      productId: "productId",
+      variantId: "variantId",
+      quantity: 2
+    }
+  ],
+  shippingAddress: {
+    name: "John Doe",
+    street: "123 Main St",
+    city: "City",
+    state: "State",
+    postalCode: "12345",
+    country: "Country"
+  },
+  paymentMethod: "stripe"
+}
+</p><p>
+Response (200):
+{
+  success: true,
+  clientSecret: "pi_1234567890",
+  order: { _id, orderNumber, total }
+}
+```
+</p><p>
+#### Get Orders
+```
+GET /orders
+Headers:
+<li>Authorization: Bearer {accessToken}</li>
+</p><p>
+Query Parameters:
+<li>page: number</li>
+<li>limit: number</li>
+<li>status: string</li>
+</p><p>
+Response (200):
+{
+  success: true,
+  data: [
+    {
+      _id: "orderId",
+      orderNumber: "ORD-123456",
+      status: "shipped",
+      total: 299.97,
+      createdAt: "2026-06-18T..."
+    }
+  ]
+}
+```
+</p><p>
+#### Get Order Details
+```
+GET /orders/:id
+Headers:
+<li>Authorization: Bearer {accessToken}</li>
+</p><p>
+Response (200):
+{
+  success: true,
+  data: {
+    _id: "orderId",
+    orderNumber: "ORD-123456",
+    customer: {...},
+    items: [...],
+    status: "shipped",
+    payment: {...},
+    shippingAddress: {...},
+    trackingNumber: "TRK123456",
+    estimatedDelivery: "2026-06-25T...",
+    total: 299.97
+  }
+}
+```
+</p><p>
+<h3>Review Endpoints</h3>
+</p><p>
+#### Create Review
+```
+POST /reviews
+Headers:
+<li>Authorization: Bearer {accessToken}</li>
+</p><p>
+Request:
+{
+  productId: "productId",
+  orderId: "orderId",
+  rating: 5,
+  title: "Great product!",
+  content: "Excellent quality and fast shipping."
+}
+</p><p>
+Response (201):
+{
+  success: true,
+  data: {
+    _id: "reviewId",
+    rating: 5,
+    title: "Great product!",
+    content: "...",
+    verified: true,
+    createdAt: "2026-06-18T..."
+  }
+}
+```
+</p><p>
+#### Get Reviews
+```
+GET /reviews?productId=productId&page=1&limit=10
+</p><p>
+Response (200):
+{
+  success: true,
+  data: [
+    {
+      _id: "reviewId",
+      rating: 5,
+      title: "Great product!",
+      content: "...",
+      customer: { name: "John Doe" },
+      helpful: 25,
+      createdAt: "2026-06-18T..."
+    }
+  ]
+}
+```
+</p><p>
+---
+</p><p>
+<h2>Frontend Components</h2>
+</p><p>
+<h3>Page Structure</h3>
+</p><p>
+#### Customer Portal
+<li>**HomePage**: Featured products, promotions, categories</li>
+<li>**ProductsPage**: Product listing with filters and pagination</li>
+<li>**ProductDetailPage**: Full product information with reviews</li>
+<li>**CartPage**: Shopping cart with item management</li>
+<li>**CheckoutPage**: Address, shipping, and payment information</li>
+<li>**OrdersPage**: Order history and tracking</li>
+<li>**WishlistPage**: Saved items for later</li>
+<li>**ProfilePage**: User account and preferences</li>
+</p><p>
+#### Seller Portal
+<li>**DashboardPage**: Sales metrics and overview</li>
+<li>**ProductsPage**: Inventory management</li>
+<li>**OrdersPage**: Order fulfillment management</li>
+<li>**AnalyticsPage**: Sales and revenue charts</li>
+<li>**SettingsPage**: Store configuration</li>
+</p><p>
+#### Admin Portal
+<li>**DashboardPage**: Platform overview and metrics</li>
+<li>**UsersPage**: User account management</li>
+<li>**SellersPage**: Seller approval and management</li>
+<li>**OrdersPage**: Global order management</li>
+<li>**ProductsPage**: Product moderation</li>
+<li>**AnalyticsPage**: Platform analytics</li>
+</p><p>
+<h3>Key Components</h3>
+</p><p>
+#### Reusable Components
+<li>`ProductCard`: Product display with image and price</li>
+<li>`ReviewSection`: Product reviews display</li>
+<li>`RatingComponent`: Star rating display</li>
+<li>`NotificationBanner`: Toast notifications</li>
+<li>`LoadingSpinner`: Loading indicator</li>
+<li>`CartSummary`: Order total calculation</li>
+<li>`Header`: Navigation and search</li>
+<li>`Footer`: Links and information</li>
+</p><p>
+---
+</p><p>
+<h2>Deployment</h2>
+</p><p>
+<h3>Development Environment</h3>
+```bash
+<h1>Backend</h1>
+npm run dev  # Starts on port 5000
+</p><p>
+<h1>Frontend</h1>
+npm run dev  # Starts on port 5173
+```
+</p><p>
+<h3>Production Deployment</h3>
+</p><p>
+#### Backend Deployment
+<li>**Platform**: Heroku, Render, or AWS EC2</li>
+<li>**Process Manager**: PM2</li>
+<li>**Reverse Proxy**: Nginx</li>
+<li>**Environment**: .env with production variables</li>
+<li>**Database**: MongoDB Atlas</li>
+<li>**Monitoring**: Winston logs, Sentry (Phase 2)</li>
+</p><p>
+#### Frontend Deployment
+<li>**Build**: `npm run build` → optimized static files</li>
+<li>**Hosting**: Vercel, Netlify, or AWS S3 + CloudFront</li>
+<li>**CDN**: Cloudinary for images</li>
+<li>**SSL**: Let's Encrypt HTTPS</li>
+</p><p>
+#### Database Setup
+```javascript
+// MongoDB Atlas
+<li>Cluster: Production (3-node replica set)</li>
+<li>Connection: Managed Cloud</li>
+<li>Backup: Daily automated</li>
+<li>Monitoring: MongoDB Cloud Monitoring</li>
+```
+</p><p>
+---
+</p><p>
+<h2>Security</h2>
+</p><p>
+<h3>Authentication Security</h3>
+<li>JWT with 15-minute expiration</li>
+<li>Refresh Token Rotation (RTR)</li>
+<li>HttpOnly, Secure, SameSite cookies</li>
+<li>Password hashing with bcrypt (12 salt rounds)</li>
+<li>Email verification for new accounts</li>
+</p><p>
+<h3>API Security</h3>
+<li>HTTPS enforcement</li>
+<li>CORS configured</li>
+<li>Rate limiting (5-100 requests/minute)</li>
+<li>Input validation and sanitization</li>
+<li>CSRF protection via SameSite cookies</li>
+<li>Security headers (Helmet.js)</li>
+<li>Request signature verification (payments)</li>
+</p><p>
+<h3>Data Security</h3>
+<li>Sensitive fields encrypted in database</li>
+<li>Passwords never logged</li>
+<li>PCI DSS compliance via Stripe/Razorpay</li>
+<li>GDPR-compliant data deletion</li>
+<li>Audit logging for admin actions</li>
+<li>Secure file uploads (Cloudinary)</li>
+</p><p>
+<h3>Payment Security</h3>
+<li>No card data stored (PCI DSS)</li>
+<li>Webhook signature verification</li>
+<li>Idempotency keys for payment requests</li>
+<li>Failed payment handling</li>
+<li>Refund verification</li>
+</p><p>
+---
+</p><p>
+<h2>Performance</h2>
+</p><p>
+<h3>Optimization Strategies</h3>
+</p><p>
+#### Frontend Performance
+<li>Code splitting by route</li>
+<li>Lazy loading components</li>
+<li>Image optimization (Cloudinary)</li>
+<li>Virtual scrolling for lists</li>
+<li>React Query caching</li>
+<li>Memoization of expensive components</li>
+</p><p>
+#### Backend Performance
+<li>Database indexing (text, compound)</li>
+<li>Query optimization and pagination</li>
+<li>Response compression (gzip)</li>
+<li>Connection pooling</li>
+<li>Async processing for heavy operations</li>
+</p><p>
+#### Monitoring Targets
+<li>Page load time: < 2 seconds</li>
+<li>API response: < 200ms (95th percentile)</li>
+<li>Search response: < 500ms</li>
+<li>WebSocket latency: < 100ms</li>
+<li>Lighthouse score: > 90</li>
+</p><p>
+---
+</p><p>
+<h2>Troubleshooting</h2>
+</p><p>
+<h3>Common Issues</h3>
+</p><p>
+#### Authentication Issues
+<li>**Problem**: "Invalid token" error</li>
+  - **Solution**: Check token expiration, refresh token
+  - **Verify**: Token payload in JWT.io
+</p><p>
+#### Database Connection Issues
+<li>**Problem**: "MongoDB connection failed"</li>
+  - **Solution**: Check MONGODB_URI in .env
+  - **Verify**: Connection string format and IP whitelist
+</p><p>
+#### Payment Processing Issues
+<li>**Problem**: Stripe webhook not triggering</li>
+  - **Solution**: Check webhook signing secret
+  - **Verify**: Stripe dashboard webhook logs
+</p><p>
+#### Real-time Notification Issues
+<li>**Problem**: Socket.io connection dropping</li>
+  - **Solution**: Check CORS configuration
+  - **Verify**: Socket.io version compatibility
+</p><p>
+---
+</p><p>
+<h2>Support & Maintenance</h2>
+</p><p>
+<h3>Regular Maintenance Tasks</h3>
+<li>[ ] Database backups (daily)</li>
+<li>[ ] Log rotation (weekly)</li>
+<li>[ ] Security updates (as released)</li>
+<li>[ ] Performance monitoring (daily)</li>
+<li>[ ] Error tracking review (weekly)</li>
+<li>[ ] User feedback analysis (bi-weekly)</li>
+</p><p>
+<h3>Escalation Procedure</h3>
+1. **Level 1**: Application errors - Check logs
+2. **Level 2**: Database issues - Check connection
+3. **Level 3**: Infrastructure - Contact cloud provider
+4. **Level 4**: Third-party - Contact service provider
+</p><p>
+---
+</p><p>
+<h2>Additional Resources</h2>
+</p><p>
+<h3>Documentation Files</h3>
+<li>[PROJECT_OVERVIEW.md](./PROJECT_OVERVIEW.md) - Project vision and scope</li>
+<li>[PROJECT_PLAN.md](./PROJECT_PLAN.md) - Timeline and milestones</li>
+<li>[SYSTEM_DESIGN.md](./SYSTEM_DESIGN.md) - Architecture details</li>
+<li>[DEVELOPMENT_GUIDE.md](./DEVELOPMENT_GUIDE.md) - Implementation guide</li>
+<li>[FUNCTIONAL_REQUIREMENTS.md](./FUNCTIONAL_REQUIREMENTS.md) - Feature specifications</li>
+<li>[TECHNICAL_STACK.md](./TECHNICAL_STACK.md) - Technology selection</li>
+</p><p>
+<h3>Quick Links</h3>
+<li>**GitHub**: [Repository URL]</li>
+<li>**API Docs**: Postman collection included</li>
+<li>**Database**: MongoDB Atlas Dashboard</li>
+<li>**Hosting**: Vercel/Heroku Dashboard</li>
+<li>**Monitoring**: Sentry/DataDog</li>
+</p><p>
+---
+</p><p>
+**Document Version**: 1.0.0  
+**Last Updated**: 2026-06-18  
+**Status**: ✅ Complete and Approved  
+**Maintained By**: Development Team  
+**Next Review**: 2026-07-18
+</p><p>
+</body>
+</html>

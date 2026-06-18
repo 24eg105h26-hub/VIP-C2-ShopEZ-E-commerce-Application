@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TECHNICAL_STACK</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.2;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            background: white;
+        }
+        
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            border-bottom: 2pt solid #003366;
+            padding-bottom: 6pt;
+        }
+        
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            color: #003366;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 9pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+        }
+        
+        p {
+            margin-bottom: 6pt;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 18pt;
+            margin-bottom: 6pt;
+        }
+        
+        li {
+            margin-bottom: 3pt;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 6pt;
+        }
+        
+        th, td {
+            border: 1pt solid #999;
+            padding: 6pt;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2pt 4pt;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+            border-radius: 3pt;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 10pt;
+            border-left: 3pt solid #003366;
+            margin-bottom: 6pt;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+        }
+        
+        blockquote {
+            border-left: 4pt solid #003366;
+            margin-left: 0;
+            padding-left: 10pt;
+            margin-bottom: 6pt;
+            font-style: italic;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 1in;
+            }
+            
+            h1 {
+                page-break-after: avoid;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>ShopEZ - Technology Stack & Architecture</h1>
+</p><p>
+<h2>Technology Stack Overview</h2>
+</p><p>
+<h3>Backend Technologies</h3>
+</p><p>
+#### Framework & Runtime
+<li>**Node.js** (v18+)</li>
+  - Rationale: High performance, non-blocking I/O, excellent for real-time applications
+  - Supports: WebSockets, event-driven architecture
+</p><p>
+<li>**Express.js** (v4.19.2)</li>
+  - Rationale: Lightweight, flexible, industry-standard
+  - Usage: HTTP server, routing, middleware management
+  - Supports: Custom middleware for auth, validation, error handling
+</p><p>
+#### Database
+<li>**MongoDB**</li>
+  - Rationale: Document-oriented, flexible schema, excellent for e-commerce
+  - Advantages: JSON-like documents, rich queries, aggregation pipeline
+  - Scaling: Supports horizontal scaling via sharding
+</p><p>
+<li>**Mongoose** (v8.4.1)</li>
+  - Rationale: ODM (Object Document Mapper) for MongoDB
+  - Features: Schema validation, middleware hooks, query builders
+  - Usage: Schema definition, validation, relationships
+</p><p>
+#### Authentication & Security
+<li>**JWT (JSON Web Tokens)**</li>
+  - Implementation: jsonwebtoken (v9.0.2)
+  - Features: Stateless authentication, refresh token rotation
+  - Token Lifetime: Access (15 min), Refresh (7 days)
+</p><p>
+<li>**bcryptjs** (v2.4.3)</li>
+  - Rationale: Industry-standard password hashing
+  - Salt Rounds: 12 (security vs performance balance)
+</p><p>
+<li>**Helmet.js** (v7.1.0)</li>
+  - Rationale: Security headers middleware
+  - Protects: XSS, Clickjacking, CSRF (indirectly)
+</p><p>
+<li>**express-validator** (v7.1.0)</li>
+  - Rationale: Input validation and sanitization
+  - Features: Schema validation, custom validators
+</p><p>
+#### Real-time Communication
+<li>**Socket.io** (v4.7.5)</li>
+  - Rationale: Real-time bidirectional communication
+  - Usage: Order notifications, inventory updates, chat (Phase 2)
+  - Fallback: Long polling support
+</p><p>
+#### Payment Processing
+<li>**Stripe** (v15.11.0)</li>
+  - Market: Global, 195+ countries
+  - Features: Recurring billing, subscriptions, hosted checkout
+  - Integration: Webhook verification, secure token handling
+</p><p>
+<li>**Razorpay** (v2.9.2)</li>
+  - Market: India-focused, excellent local support
+  - Features: Multiple payment methods, settlements
+  - Integration: Webhook verification, refund handling
+</p><p>
+#### File & Image Management
+<li>**Cloudinary** (v2.2.0)</li>
+  - Rationale: Cloud image storage and CDN
+  - Features: Image optimization, transformations, caching
+  - Usage: Product images, user avatars, seller store images
+</p><p>
+#### Email Service
+<li>**Nodemailer** (v6.9.13)</li>
+  - Rationale: Simple email delivery
+  - Features: Template support, attachments
+  - Usage: Verification emails, order confirmations, notifications
+</p><p>
+#### Logging & Monitoring
+<li>**Winston** (v3.13.0)</li>
+  - Rationale: Production-grade logging
+  - Features: Multiple transports, log levels, formatting
+  - Usage: Error tracking, request logging, performance monitoring
+</p><p>
+#### Additional Backend Libraries
+<li>**cors** (v2.8.5) - Cross-Origin Resource Sharing</li>
+<li>**cookie-parser** (v1.4.6) - Cookie handling</li>
+<li>**express-rate-limit** (v7.3.1) - Rate limiting</li>
+<li>**morgan** (v1.10.0) - HTTP request logging</li>
+<li>**dotenv** (v16.4.5) - Environment configuration</li>
+</p><p>
+#### Testing & Development
+<li>**Jest** (v29.7.0) - Unit testing framework</li>
+<li>**Supertest** (v7.0.0) - HTTP assertion library</li>
+<li>**mongodb-memory-server** (v11.2.0) - In-memory MongoDB for testing</li>
+<li>**Nodemon** (v3.1.3) - Auto-reload during development</li>
+</p><p>
+---
+</p><p>
+<h3>Frontend Technologies</h3>
+</p><p>
+#### Framework & Libraries
+<li>**React** (v18.3.1)</li>
+  - Rationale: Component-based, virtual DOM, large ecosystem
+  - Advantages: Reusable components, efficient rendering
+</p><p>
+<li>**Vite** (v5.2.11)</li>
+  - Rationale: Lightning-fast build tool
+  - Advantages: Fast HMR (Hot Module Replacement), optimized builds
+  - Build Time: < 500ms
+</p><p>
+#### State Management
+<li>**Redux Toolkit** (v2.2.5)</li>
+  - Rationale: Predictable state container
+  - Features: Redux store, slices, normalized state
+  - Usage: Auth state, user data, app-wide settings
+</p><p>
+<li>**react-redux** (v9.1.2)</li>
+  - Rationale: Official React bindings for Redux
+</p><p>
+#### Data Fetching & Caching
+<li>**React Query** (@tanstack/react-query v5.45.0)</li>
+  - Rationale: Server-state management
+  - Features: Automatic caching, refetching, synchronization
+  - Usage: API data, product listings, orders
+</p><p>
+<li>**Axios** (v1.7.2)</li>
+  - Rationale: HTTP client with interceptors
+  - Features: Request/response interceptors, timeout handling
+  - Usage: API calls with auth header injection
+</p><p>
+#### Styling
+<li>**Tailwind CSS** (v3.4.4)</li>
+  - Rationale: Utility-first CSS framework
+  - Advantages: Rapid development, consistent design, small bundle size
+  - Configuration: Custom colors, responsive breakpoints
+</p><p>
+<li>**PostCSS** (v8.4.38) - CSS processing</li>
+<li>**Autoprefixer** (v10.4.19) - Vendor prefixes</li>
+</p><p>
+#### UI & Animation
+<li>**Framer Motion** (v11.2.10)</li>
+  - Rationale: Production-ready animation library
+  - Usage: Page transitions, hover effects, loading animations
+  - Performance: GPU-accelerated
+</p><p>
+<li>**Lucide React** (v0.395.0)</li>
+  - Rationale: Clean, consistent icon library
+  - Features: 395+ icons, customizable sizing/colors
+</p><p>
+#### Real-time Communication
+<li>**Socket.io-client** (v4.7.5)</li>
+  - Rationale: Client-side WebSocket library
+  - Usage: Real-time notifications, order updates
+  - Auto-reconnection: Built-in reconnection logic
+</p><p>
+#### Routing
+<li>**react-router-dom** (v6.23.1)</li>
+  - Rationale: Client-side routing
+  - Features: Nested routes, lazy loading, route protection
+  - Usage: Multi-portal navigation (customer, seller, admin)
+</p><p>
+#### Development Tools
+<li>**ESLint** (eslint.config.js) - Code quality</li>
+<li>**Vite Plugin React** - React support for Vite</li>
+<li>**Tailwind CSS IntelliSense** - IDE integration (recommended)</li>
+</p><p>
+---
+</p><p>
+<h2>System Architecture</h2>
+</p><p>
+<h3>Architectural Pattern: Clean Architecture with Separation of Concerns</h3>
+</p><p>
+```
+Frontend (React/Vite)
+    ├── Pages (Portal-specific)
+    ├── Components (Reusable UI)
+    ├── Redux (State Management)
+    ├── React Query (Server State)
+    └── Services (API Client)
+         ↓ (HTTPS/WebSocket)
+</p><p>
+Backend (Node.js/Express)
+    ├── Routes (Endpoint definitions)
+    ├── Controllers (Request handling)
+    ├── Services (Business logic)
+    ├── Models (Database schemas)
+    ├── Middleware (Auth, validation, error)
+    └── Config (Database, third-party)
+         ↓ (MongoDB Connection)
+</p><p>
+Database (MongoDB)
+    ├── Collections
+    │   ├── users
+    │   ├── products
+    │   ├── orders
+    │   ├── reviews
+    │   └── ...
+    └── Indexes (Text search, compound)
+</p><p>
+External Services
+    ├── Stripe (Payments)
+    ├── Razorpay (Payments)
+    ├── Cloudinary (Images)
+    ├── Nodemailer (Email)
+    └── Socket.io (Real-time)
+```
+</p><p>
+---
+</p><p>
+<h2>Data Flow Architecture</h2>
+</p><p>
+<h3>User Authentication Flow</h3>
+```
+Client (Login)
+    ↓
+Express Route → Auth Controller
+    ↓
+User Model (Query & Verify)
+    ↓
+bcryptjs (Password Hash Comparison)
+    ↓
+JWT (Generate Tokens)
+    ↓
+Response (Access + Refresh Tokens)
+    ↓
+Client (Store in HttpOnly Cookies)
+```
+</p><p>
+<h3>Product Search Flow</h3>
+```
+Client (Search Query)
+    ↓
+Express Route → Product Controller
+    ↓
+Express Validator (Sanitize Input)
+    ↓
+Product Model (Full-text Search + Filters)
+    ↓
+MongoDB Aggregation Pipeline
+    ↓
+Response (Paginated Results)
+    ↓
+React Query (Cache Results)
+    ↓
+Client (Display with Framer Motion)
+```
+</p><p>
+<h3>Real-time Notification Flow</h3>
+```
+Event Trigger (Order Status Change)
+    ↓
+Backend Service (Process Event)
+    ↓
+Socket.io (Emit to Connected Clients)
+    ↓
+WebSocket Connection
+    ↓
+Client Socket Listener
+    ↓
+Redux Action (Update State)
+    ↓
+React Component (Re-render)
+    ↓
+UI Update (Notification Display)
+```
+</p><p>
+<h3>Payment Processing Flow</h3>
+```
+Client (Checkout)
+    ↓
+Backend Route → Payment Controller
+    ↓
+Stripe/Razorpay API (Create Payment)
+    ↓
+Redirect to Payment Gateway
+    ↓
+Customer (Complete Payment)
+    ↓
+Webhook (Payment Confirmation)
+    ↓
+Backend (Verify & Update Order)
+    ↓
+Email Service (Send Confirmation)
+    ↓
+Socket.io (Notify Seller)
+    ↓
+Database (Order Created)
+```
+</p><p>
+---
+</p><p>
+<h2>Deployment Architecture</h2>
+</p><p>
+<h3>Development Environment</h3>
+<li>**Frontend**: `npm run dev` (Vite dev server on port 5173)</li>
+<li>**Backend**: `npm run dev` (Nodemon on port 5000)</li>
+<li>**Database**: Local MongoDB or MongoDB Atlas</li>
+</p><p>
+<h3>Production Environment</h3>
+<li>**Frontend**: </li>
+  - Build: `npm run build` → Optimized static files
+  - Hosting: Vercel, Netlify, or AWS S3 + CloudFront
+  - CDN: Cloudinary for images
+</p><p>
+<li>**Backend**:</li>
+  - Deployment: Heroku, Render, AWS EC2, or Railway
+  - Process Manager: PM2 for process management
+  - Reverse Proxy: Nginx for load balancing
+</p><p>
+<li>**Database**:</li>
+  - MongoDB Atlas (Managed cloud service)
+  - Backup: Automated daily backups
+  - Replication: 3-node replica set for HA
+</p><p>
+<li>**Real-time**:</li>
+  - Socket.io with Redis adapter for multi-instance scaling
+  - Namespace separation (customer, seller, admin)
+</p><p>
+---
+</p><p>
+<h2>Database Schema Overview</h2>
+</p><p>
+<h3>Collections</h3>
+</p><p>
+#### Users
+```javascript
+{
+  _id: ObjectId,
+  email: String (unique),
+  password: String (hashed),
+  name: String,
+  role: String (customer/seller/admin),
+  avatar: String (Cloudinary URL),
+  verified: Boolean,
+  lastLogin: Date,
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+</p><p>
+#### Products
+```javascript
+{
+  _id: ObjectId,
+  name: String (indexed for text search),
+  description: String,
+  price: Decimal,
+  category: ObjectId (ref: Category),
+  seller: ObjectId (ref: User),
+  images: [{ url, alt }],
+  variants: [{ name, options: [String], price }],
+  inventory: [{ variant, quantity }],
+  rating: Decimal,
+  reviewCount: Number,
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+</p><p>
+#### Orders
+```javascript
+{
+  _id: ObjectId,
+  orderNumber: String (unique),
+  customer: ObjectId (ref: User),
+  items: [{ product, variant, quantity, price }],
+  status: String (pending/confirmed/shipped/delivered),
+  payment: { method, transactionId, amount, status },
+  shipping: { address, method, estimatedDate },
+  total: Decimal,
+  createdAt: Date,
+  updatedAt: Date
+}
+```
+</p><p>
+---
+</p><p>
+<h2>Security Considerations</h2>
+</p><p>
+<h3>Authentication & Authorization</h3>
+<li>JWT with HTTP-only cookies</li>
+<li>Refresh Token Rotation (RTR)</li>
+<li>Role-Based Access Control (RBAC)</li>
+<li>Password hashing with bcrypt</li>
+</p><p>
+<h3>Data Protection</h3>
+<li>HTTPS enforcement</li>
+<li>Input validation (express-validator)</li>
+<li>SQL injection prevention (Mongoose ORM)</li>
+<li>XSS protection (input sanitization)</li>
+<li>CSRF protection (SameSite cookies)</li>
+</p><p>
+<h3>API Security</h3>
+<li>Rate limiting (express-rate-limit)</li>
+<li>Security headers (Helmet.js)</li>
+<li>Secure password requirements</li>
+<li>Account lockout after failed attempts</li>
+<li>Token expiration and refresh rotation</li>
+</p><p>
+<h3>Sensitive Data</h3>
+<li>PCI DSS compliance via Stripe/Razorpay (no card storage)</li>
+<li>Encrypted sensitive fields in DB</li>
+<li>Audit logging for admin actions</li>
+<li>GDPR compliant data deletion</li>
+</p><p>
+---
+</p><p>
+<h2>Performance Optimization</h2>
+</p><p>
+<h3>Frontend</h3>
+<li>Code splitting and lazy loading</li>
+<li>Image optimization via Cloudinary</li>
+<li>Caching with React Query</li>
+<li>Virtual scrolling for large lists</li>
+<li>Service Worker for offline support (Phase 2)</li>
+</p><p>
+<h3>Backend</h3>
+<li>Database indexing (text search, compound indexes)</li>
+<li>Query optimization and pagination</li>
+<li>Response compression (gzip)</li>
+<li>Caching strategy (Redis Phase 2)</li>
+<li>Connection pooling for MongoDB</li>
+</p><p>
+<h3>Monitoring & Analytics</h3>
+<li>Winston logging for errors and performance</li>
+<li>Real User Monitoring (Phase 2)</li>
+<li>Sentry for error tracking (Phase 2)</li>
+<li>Performance metrics dashboard (Phase 2)</li>
+</p><p>
+---
+</p><p>
+**Technology Stack Document Created**: 2026-06-18
+**Status**: ✅ Approved and Locked
+**Next Phase**: System Design and Architecture Specifications
+</p><p>
+</body>
+</html>

@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DEVELOPMENT_GUIDE</title>
+    <style>
+        @page {
+            size: A4;
+            margin: 1in;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: Calibri, Arial, sans-serif;
+            font-size: 11pt;
+            line-height: 1.2;
+            color: #333;
+            max-width: 8.5in;
+            margin: 0 auto;
+            padding: 1in;
+            background: white;
+        }
+        
+        h1 {
+            font-size: 18pt;
+            font-weight: bold;
+            margin-top: 0;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            border-bottom: 2pt solid #003366;
+            padding-bottom: 6pt;
+        }
+        
+        h2 {
+            font-size: 14pt;
+            font-weight: bold;
+            margin-top: 12pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+            color: #003366;
+        }
+        
+        h3 {
+            font-size: 12pt;
+            font-weight: bold;
+            margin-top: 9pt;
+            margin-bottom: 6pt;
+            page-break-after: avoid;
+        }
+        
+        p {
+            margin-bottom: 6pt;
+            text-align: justify;
+        }
+        
+        ul, ol {
+            margin-left: 18pt;
+            margin-bottom: 6pt;
+        }
+        
+        li {
+            margin-bottom: 3pt;
+        }
+        
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-bottom: 6pt;
+        }
+        
+        th, td {
+            border: 1pt solid #999;
+            padding: 6pt;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f0f0f0;
+            font-weight: bold;
+        }
+        
+        code {
+            background-color: #f5f5f5;
+            padding: 2pt 4pt;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+            border-radius: 3pt;
+        }
+        
+        pre {
+            background-color: #f5f5f5;
+            padding: 10pt;
+            border-left: 3pt solid #003366;
+            margin-bottom: 6pt;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 10pt;
+        }
+        
+        blockquote {
+            border-left: 4pt solid #003366;
+            margin-left: 0;
+            padding-left: 10pt;
+            margin-bottom: 6pt;
+            font-style: italic;
+        }
+        
+        .page-break {
+            page-break-before: always;
+        }
+        
+        @media print {
+            body {
+                margin: 0;
+                padding: 1in;
+            }
+            
+            h1 {
+                page-break-after: avoid;
+            }
+            
+            h2 {
+                page-break-after: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>ShopEZ - Development Implementation Guide</h1>
+</p><p>
+<h2>Project Development Overview</h2>
+</p><p>
+**Project**: ShopEZ - B2C E-Commerce Marketplace  
+**Phase**: Development & Implementation  
+**Duration**: Weeks 5-11 (7 weeks)  
+**Status**: In Progress  
+</p><p>
+---
+</p><p>
+<h2>Technology Stack (Confirmed)</h2>
+</p><p>
+<h3>Backend Stack</h3>
+<li>**Runtime**: Node.js v18+</li>
+<li>**Framework**: Express.js v4.19.2</li>
+<li>**Database**: MongoDB with Mongoose v8.4.1</li>
+<li>**Authentication**: JWT + bcryptjs</li>
+<li>**Real-time**: Socket.io v4.7.5</li>
+<li>**Payments**: Stripe v15.11.0, Razorpay v2.9.2</li>
+<li>**Storage**: Cloudinary v2.2.0</li>
+<li>**Email**: Nodemailer v6.9.13</li>
+<li>**Logging**: Winston v3.13.0</li>
+<li>**Security**: Helmet.js v7.1.0</li>
+<li>**Validation**: express-validator v7.1.0</li>
+<li>**Testing**: Jest + Supertest</li>
+</p><p>
+<h3>Frontend Stack</h3>
+<li>**Framework**: React v18.3.1</li>
+<li>**Build Tool**: Vite v5.2.11</li>
+<li>**State Management**: Redux Toolkit v2.2.5</li>
+<li>**Server State**: React Query v5.45.0</li>
+<li>**HTTP Client**: Axios v1.7.2</li>
+<li>**Styling**: Tailwind CSS v3.4.4</li>
+<li>**Animations**: Framer Motion v11.2.10</li>
+<li>**Icons**: Lucide React v0.395.0</li>
+<li>**Real-time**: Socket.io-client v4.7.5</li>
+<li>**Routing**: React Router v6.23.1</li>
+</p><p>
+---
+</p><p>
+<h2>Development Workflow</h2>
+</p><p>
+<h3>Git Workflow</h3>
+```
+main (Production)
+  ↑
+  └─ develop (Staging)
+       ↑
+       ├─ feature/auth
+       ├─ feature/products
+       ├─ feature/orders
+       ├─ fix/bug-xyz
+       └─ ...
+```
+</p><p>
+<h3>Commit Message Convention</h3>
+```
+type(scope): subject
+</p><p>
+<body>
+</p><p>
+<footer>
+```
+</p><p>
+**Types**: feat, fix, docs, style, refactor, test, chore  
+**Example**: `feat(auth): implement JWT refresh token rotation`
+</p><p>
+---
+</p><p>
+<h2>Project File Structure</h2>
+</p><p>
+<h3>Backend Structure</h3>
+```
+backend/
+├── src/
+│   ├── app.js (Main Express app)
+│   ├── server.js (Entry point)
+│   ├── config/
+│   │   ├── db.js (MongoDB connection)
+│   │   └── socket.js (Socket.io setup)
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── productController.js
+│   │   ├── cartController.js
+│   │   ├── orderController.js
+│   │   ├── sellerController.js
+│   │   ├── adminController.js
+│   │   ├── reviewController.js
+│   │   ├── wishlistController.js
+│   │   ├── categoryController.js
+│   │   └── notificationController.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── Product.js
+│   │   ├── Cart.js
+│   │   ├── Order.js
+│   │   ├── Review.js
+│   │   ├── Wishlist.js
+│   │   ├── Category.js
+│   │   ├── Notification.js
+│   │   ├── Coupon.js
+│   │   └── index.js
+│   ├── routes/
+│   │   ├── index.js (Route aggregator)
+│   │   ├── authRoutes.js
+│   │   ├── productRoutes.js
+│   │   ├── cartRoutes.js
+│   │   ├── orderRoutes.js
+│   │   ├── sellerRoutes.js
+│   │   ├── adminRoutes.js
+│   │   ├── reviewRoutes.js
+│   │   ├── wishlistRoutes.js
+│   │   ├── categoryRoutes.js
+│   │   └── notificationRoutes.js
+│   ├── middleware/
+│   │   ├── auth.js (JWT verification)
+│   │   ├── errorHandler.js (Centralized)
+│   │   ├── validate.js (Input validation)
+│   │   └── sanitize.js (Input sanitization)
+│   ├── services/
+│   │   ├── emailService.js
+│   │   ├── paymentService.js
+│   │   ├── cloudinaryService.js
+│   │   ├── stripeService.js
+│   │   ├── razorpayService.js
+│   │   ├── socketService.js
+│   │   └── tokenService.js
+│   ├── utils/
+│   │   ├── logger.js (Winston)
+│   │   ├── token.js (JWT utilities)
+│   │   ├── ApiError.js (Custom error class)
+│   │   ├── seed.js (Database seeding)
+│   │   ├── localDb.js
+│   │   └── seeder.js
+│   └── validators/
+│       └── authValidator.js
+├── tests/
+│   ├── api.test.js
+│   ├── extendedApi.test.js
+│   └── ... (more test files)
+├── logs/
+│   ├── error.log
+│   └── combined.log
+├── .env.example
+├── .env (not in git)
+├── package.json
+└── README.md
+```
+</p><p>
+<h3>Frontend Structure</h3>
+```
+frontend/
+├── src/
+│   ├── main.jsx (Entry point)
+│   ├── App.jsx (Root component)
+│   ├── index.css (Global styles)
+│   ├── App.css (App styles)
+│   ├── pages/
+│   │   ├── customer/
+│   │   │   ├── HomePage.jsx
+│   │   │   ├── ProductsPage.jsx
+│   │   │   ├── ProductDetailPage.jsx
+│   │   │   ├── CartPage.jsx
+│   │   │   ├── CheckoutPage.jsx
+│   │   │   ├── OrdersPage.jsx
+│   │   │   ├── OrderDetailPage.jsx
+│   │   │   ├── WishlistPage.jsx
+│   │   │   ├── ProfilePage.jsx
+│   │   │   └── ReviewPage.jsx
+│   │   ├── seller/
+│   │   │   ├── DashboardPage.jsx
+│   │   │   ├── ProductsManagement.jsx
+│   │   │   ├── InventoryPage.jsx
+│   │   │   ├── OrdersPage.jsx
+│   │   │   ├── AnalyticsPage.jsx
+│   │   │   └── SettingsPage.jsx
+│   │   ├── admin/
+│   │   │   ├── DashboardPage.jsx
+│   │   │   ├── UsersManagement.jsx
+│   │   │   ├── SellersManagement.jsx
+│   │   │   ├── ProductsModeration.jsx
+│   │   │   ├── OrdersManagement.jsx
+│   │   │   └── AnalyticsPage.jsx
+│   │   ├── auth/
+│   │   │   ├── LoginPage.jsx
+│   │   │   ├── SignupPage.jsx
+│   │   │   └── VerifyEmailPage.jsx
+│   │   └── common/
+│   │       ├── NotFoundPage.jsx
+│   │       └── ErrorPage.jsx
+│   ├── components/
+│   │   ├── common/
+│   │   │   ├── Header.jsx
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Footer.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── NotificationBell.jsx
+│   │   │   └── LoadingSpinner.jsx
+│   │   ├── products/
+│   │   │   ├── ProductCard.jsx
+│   │   │   ├── ProductGrid.jsx
+│   │   │   ├── ProductFilters.jsx
+│   │   │   ├── ProductReviews.jsx
+│   │   │   └── RatingComponent.jsx
+│   │   ├── cart/
+│   │   │   ├── CartItem.jsx
+│   │   │   ├── CartSummary.jsx
+│   │   │   └── CartActions.jsx
+│   │   ├── checkout/
+│   │   │   ├── AddressForm.jsx
+│   │   │   ├── ShippingMethod.jsx
+│   │   │   ├── PaymentMethod.jsx
+│   │   │   └── OrderSummary.jsx
+│   │   └── layout/
+│   │       ├── ProtectedRoute.jsx
+│   │       └── Layout.jsx
+│   ├── context/
+│   │   └── SocketContext.jsx
+│   ├── redux/
+│   │   ├── store.js
+│   │   └── slices/
+│   │       ├── authSlice.js
+│   │       ├── cartSlice.js
+│   │       ├── productSlice.js
+│   │       └── notificationSlice.js
+│   ├── services/
+│   │   ├── api/
+│   │   │   ├── authApi.js
+│   │   │   ├── productApi.js
+│   │   │   ├── cartApi.js
+│   │   │   ├── orderApi.js
+│   │   │   └── axiosInstance.js
+│   │   └── socket/
+│   │       └── socketService.js
+│   ├── utils/
+│   │   ├── constants.js
+│   │   ├── helpers.js
+│   │   ├── formatters.js
+│   │   └── validators.js
+│   └── assets/
+│       ├── images/
+│       ├── icons/
+│       └── fonts/
+├── public/
+├── index.html
+├── vite.config.js
+├── tailwind.config.js
+├── postcss.config.js
+├── eslint.config.js
+├── .env.example
+├── .env (not in git)
+├── package.json
+└── README.md
+```
+</p><p>
+---
+</p><p>
+<h2>Development Implementation Plan</h2>
+</p><p>
+<h3>Week 5: Backend Core Setup & Authentication</h3>
+</p><p>
+**Tasks**:
+1. ✅ Initialize Express.js project structure
+2. ✅ Setup MongoDB connection with Mongoose
+3. ✅ Implement User model and schema
+4. ✅ Create authentication middleware (JWT)
+5. ✅ Implement registration endpoint
+6. ✅ Implement login endpoint
+7. ✅ Setup refresh token rotation
+8. ✅ Email verification system
+9. ✅ Error handling middleware
+10. ✅ Logging setup (Winston)
+11. ✅ Input validation (express-validator)
+12. ✅ Unit tests for auth module
+</p><p>
+**Acceptance Criteria**:
+<li>All auth endpoints functional</li>
+<li>JWT tokens generating correctly</li>
+<li>Refresh token rotation working</li>
+<li>Email verification functioning</li>
+<li>100% test coverage for auth</li>
+</p><p>
+---
+</p><p>
+<h3>Week 6: Backend Product Management</h3>
+</p><p>
+**Tasks**:
+1. Create Product model with variants
+2. Implement product listing API
+3. Full-text search functionality
+4. Product filtering endpoints
+5. Product details endpoint
+6. Category management
+7. Product variant inventory locking
+8. Implement Cloudinary integration
+9. Image upload endpoints
+10. Product CRUD operations
+11. Seller product management
+12. Integration tests
+</p><p>
+**Acceptance Criteria**:
+<li>Product endpoints working</li>
+<li>Search response < 500ms</li>
+<li>Variant management functional</li>
+<li>Image upload optimized</li>
+<li>80% test coverage</li>
+</p><p>
+---
+</p><p>
+<h3>Week 7: Backend Orders & Payments</h3>
+</p><p>
+**Tasks**:
+1. Create Order model and schema
+2. Implement shopping cart endpoints
+3. Create checkout process
+4. Implement Stripe integration
+5. Implement Razorpay integration
+6. Payment webhook handling
+7. Order creation and tracking
+8. Order status management
+9. Refund processing
+10. Order history endpoints
+11. Email notifications for orders
+12. Integration tests
+</p><p>
+**Acceptance Criteria**:
+<li>Full checkout flow working</li>
+<li>Both payment gateways functional</li>
+<li>Order confirmation emails sent</li>
+<li>Webhook verification working</li>
+<li>Payment success rate > 99%</li>
+</p><p>
+---
+</p><p>
+<h3>Week 8: Backend Advanced Features</h3>
+</p><p>
+**Tasks**:
+1. Implement review system
+2. Review creation and listing
+3. Rating calculations
+4. Wishlist functionality
+5. Notification system (WebSocket)
+6. Real-time order updates
+7. Admin APIs for user management
+8. Admin seller approval system
+9. Rate limiting implementation
+10. Security headers (Helmet)
+11. Seller dashboard APIs
+12. Comprehensive testing
+</p><p>
+**Acceptance Criteria**:
+<li>All features functional</li>
+<li>Real-time notifications < 1s</li>
+<li>WebSocket connections stable</li>
+<li>80%+ test coverage</li>
+</p><p>
+---
+</p><p>
+<h3>Week 5-6: Frontend Core Setup & Auth</h3>
+</p><p>
+**Tasks**:
+1. ✅ Setup Vite + React project
+2. ✅ Configure Tailwind CSS
+3. ✅ Setup Redux store
+4. ✅ Setup React Query
+5. ✅ Create authentication pages
+6. ✅ Implement login functionality
+7. ✅ Implement signup functionality
+8. ✅ Setup protected routes
+9. ✅ Email verification page
+10. ✅ Create layout components
+11. ✅ Setup axios interceptors
+12. ✅ Component testing
+</p><p>
+**Acceptance Criteria**:
+<li>Auth pages responsive</li>
+<li>Login/Signup working</li>
+<li>Protected routes secure</li>
+<li>Axios interceptors working</li>
+</p><p>
+---
+</p><p>
+<h3>Week 7-8: Frontend Product Pages</h3>
+</p><p>
+**Tasks**:
+1. Create product listing page
+2. Product detail page
+3. Implement search functionality
+4. Product filtering UI
+5. Variant selection UI
+6. Image gallery component
+7. Review display component
+8. Rating display
+9. Responsive grid layout
+10. Product card component
+11. Loading skeletons
+12. Component testing
+</p><p>
+**Acceptance Criteria**:
+<li>All pages responsive</li>
+<li>Product load < 2 seconds</li>
+<li>Search UI functional</li>
+<li>Mobile-friendly design</li>
+</p><p>
+---
+</p><p>
+<h3>Week 9: Frontend Shopping & Checkout</h3>
+</p><p>
+**Tasks**:
+1. Shopping cart page
+2. Add to cart functionality
+3. Cart item management
+4. Checkout page
+5. Address form
+6. Shipping method selection
+7. Payment method selection
+8. Order summary component
+9. Order confirmation page
+10. Order tracking page
+11. Email integration
+12. End-to-end testing
+</p><p>
+**Acceptance Criteria**:
+<li>Checkout flow complete</li>
+<li>Payment gateway integration</li>
+<li>Order confirmation working</li>
+<li>Mobile responsive</li>
+</p><p>
+---
+</p><p>
+<h3>Week 9-10: Frontend Dashboard & Portals</h3>
+</p><p>
+**Tasks**:
+1. Seller dashboard
+2. Product management interface
+3. Inventory management UI
+4. Order management page
+5. Analytics dashboard
+6. Sales charts
+7. Admin user management
+8. Admin seller approval
+9. Admin analytics
+10. Admin settings
+11. Permission-based access
+12. Testing
+</p><p>
+**Acceptance Criteria**:
+<li>All dashboards functional</li>
+<li>Real-time data updates</li>
+<li>Permission system working</li>
+<li>Responsive design</li>
+</p><p>
+---
+</p><p>
+<h2>Testing Strategy</h2>
+</p><p>
+<h3>Unit Testing</h3>
+<li>**Backend**: Jest with mongoose-memory-server</li>
+<li>**Frontend**: Jest + React Testing Library</li>
+<li>**Coverage Target**: > 80%</li>
+</p><p>
+<h3>Integration Testing</h3>
+<li>**API Testing**: Supertest</li>
+<li>**Payment Testing**: Sandbox mode</li>
+<li>**Email Testing**: Mock service</li>
+</p><p>
+<h3>E2E Testing</h3>
+<li>**Tool**: Cypress (Phase 2)</li>
+<li>**Coverage**: Critical user journeys</li>
+</p><p>
+<h3>Performance Testing</h3>
+<li>**Lighthouse**: Target > 90 score</li>
+<li>**Load Testing**: 1000 concurrent users</li>
+<li>**Response Time**: API < 200ms (95th percentile)</li>
+</p><p>
+---
+</p><p>
+<h2>Security Checklist</h2>
+</p><p>
+<li>✅ HTTPS enforced</li>
+<li>✅ CORS configured</li>
+<li>✅ CSRF protection</li>
+<li>✅ Rate limiting</li>
+<li>✅ Input validation</li>
+<li>✅ Password hashing (bcrypt)</li>
+<li>✅ JWT with RTR</li>
+<li>✅ Security headers (Helmet)</li>
+<li>✅ Sensitive data encryption</li>
+<li>✅ Secure cookies (HttpOnly, Secure, SameSite)</li>
+</p><p>
+---
+</p><p>
+<h2>Deployment Preparation</h2>
+</p><p>
+<h3>Pre-Deployment Checklist</h3>
+<li>[ ] All tests passing</li>
+<li>[ ] Code review completed</li>
+<li>[ ] Security audit passed</li>
+<li>[ ] Performance benchmarks met</li>
+<li>[ ] Documentation complete</li>
+<li>[ ] Backup strategy in place</li>
+<li>[ ] Monitoring configured</li>
+<li>[ ] Incident response plan ready</li>
+</p><p>
+---
+</p><p>
+**Development Guide Created**: 2026-06-18  
+**Status**: ✅ Ready for Implementation  
+**Next Phase**: Ongoing Development & Testing
+</p><p>
+</body>
+</html>
