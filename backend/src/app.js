@@ -81,6 +81,14 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // Root path test
+app.get('/', (req, res) => {
+  res.status(200).json({
+    status: 'ok',
+    message: 'shopEZ E-Commerce API Server is running!',
+    timestamp: new Date()
+  });
+});
+
 app.get('/health', (req, res) => {
   res.status(200).json({ status: 'ok', timestamp: new Date() });
 });

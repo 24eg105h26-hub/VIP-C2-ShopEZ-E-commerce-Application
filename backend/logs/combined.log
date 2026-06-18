@@ -1113,3 +1113,40 @@
 {"level":"info","message":"POST /api/cart 200 1096 - 12.527 ms","timestamp":"2026-06-17 16:00:04"}
 {"level":"info","message":"GET /api/cart 200 1096 - 11.143 ms","timestamp":"2026-06-17 16:00:05"}
 {"level":"info","message":"Socket disconnected: Y267XUu5rEt7RAY4AAAK","timestamp":"2026-06-17 16:00:19"}
+{"level":"warn","message":"SMTP settings not found. Fallback configured to Ethereal Email sandbox.","timestamp":"2026-06-18 12:31:03"}
+{"level":"warn","message":"Stripe SECRET_KEY is not defined. Stripe payments will operate in sandbox emulation.","timestamp":"2026-06-18 12:31:04"}
+{"level":"warn","message":"Razorpay KEY_ID/SECRET not defined. Razorpay payments will operate in sandbox emulation.","timestamp":"2026-06-18 12:31:04"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-18 12:31:04"}
+{"level":"info","message":"Socket connected: 9hkAhV9FCZpNUpmoAAAB","timestamp":"2026-06-18 12:31:05"}
+{"level":"warn","message":"SMTP settings not found. Fallback configured to Ethereal Email sandbox.","timestamp":"2026-06-18 12:31:54"}
+{"level":"warn","message":"Stripe SECRET_KEY is not defined. Stripe payments will operate in sandbox emulation.","timestamp":"2026-06-18 12:31:54"}
+{"level":"warn","message":"Razorpay KEY_ID/SECRET not defined. Razorpay payments will operate in sandbox emulation.","timestamp":"2026-06-18 12:31:54"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-18 12:31:54"}
+{"level":"info","message":"Socket connected: P9mCcZBpaexUQPlNAAAJ","timestamp":"2026-06-18 12:32:32"}
+{"level":"info","message":"GET /api/products/recommendations 200 26 - 101.857 ms","timestamp":"2026-06-18 12:32:32"}
+{"level":"info","message":"GET /api/categories 200 26 - 39.962 ms","timestamp":"2026-06-18 12:32:32"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 11.821 ms","timestamp":"2026-06-18 12:32:32"}
+{"level":"info","message":"GET /api/categories 304 - - 18.694 ms","timestamp":"2026-06-18 12:32:32"}
+{"level":"info","message":"GET /api/categories 304 - - 5.401 ms","timestamp":"2026-06-18 12:32:37"}
+{"level":"info","message":"GET /api/categories 304 - - 37.625 ms","timestamp":"2026-06-18 12:32:37"}
+{"level":"info","message":"GET /api/products? 200 65 - 139.623 ms","timestamp":"2026-06-18 12:32:37"}
+{"level":"info","message":"GET /api/products? 304 - - 19.145 ms","timestamp":"2026-06-18 12:32:37"}
+{"level":"info","message":"GET /api/products 200 11909 - 59.915 ms","timestamp":"2026-06-18 12:33:34"}
+{"level":"info","message":"GET /api/products 200 11909 - 19.066 ms","timestamp":"2026-06-18 12:34:33"}
+{"level":"info","message":"GET /api/products/recommendations 200 11763 - 26.650 ms","timestamp":"2026-06-18 12:34:43"}
+{"level":"warn","message":"SMTP settings not found. Fallback configured to Ethereal Email sandbox.","timestamp":"2026-06-18 12:35:40"}
+{"level":"warn","message":"Stripe SECRET_KEY is not defined. Stripe payments will operate in sandbox emulation.","timestamp":"2026-06-18 12:35:41"}
+{"level":"warn","message":"Razorpay KEY_ID/SECRET not defined. Razorpay payments will operate in sandbox emulation.","timestamp":"2026-06-18 12:35:41"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-18 12:35:41"}
+{"level":"info","message":"Socket connected: rEEZFGtlCf4JFa8JAAAC","timestamp":"2026-06-18 12:35:45"}
+{"level":"info","message":"Socket connected: 55Ab33oRk-kLDaHuAAAK","timestamp":"2026-06-18 12:36:12"}
+{"level":"info","message":"GET /api/categories 200 785 - 168.664 ms","timestamp":"2026-06-18 12:36:12"}
+{"level":"info","message":"GET /api/products/recommendations 200 11763 - 264.239 ms","timestamp":"2026-06-18 12:36:12"}
+{"level":"info","message":"GET /api/categories 304 - - 31.567 ms","timestamp":"2026-06-18 12:36:12"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 116.607 ms","timestamp":"2026-06-18 12:36:12"}
+{"level":"info","message":"GET /api/categories 304 - - 27.092 ms","timestamp":"2026-06-18 12:36:17"}
+{"level":"info","message":"GET /api/products? 200 11909 - 82.200 ms","timestamp":"2026-06-18 12:36:17"}
+{"level":"info","message":"GET /api/categories 304 - - 31.677 ms","timestamp":"2026-06-18 12:36:17"}
+{"level":"info","message":"GET /api/products? 304 - - 96.163 ms","timestamp":"2026-06-18 12:36:17"}
+{"level":"info","message":"GET / 404 139 - 2.478 ms","timestamp":"2026-06-18 12:36:36"}
+{"level":"info","message":"GET / 404 139 - 1.809 ms","timestamp":"2026-06-18 12:36:49"}
