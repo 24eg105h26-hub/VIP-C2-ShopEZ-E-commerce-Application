@@ -1150,3 +1150,36 @@
 {"level":"info","message":"GET /api/products? 304 - - 96.163 ms","timestamp":"2026-06-18 12:36:17"}
 {"level":"info","message":"GET / 404 139 - 2.478 ms","timestamp":"2026-06-18 12:36:36"}
 {"level":"info","message":"GET / 404 139 - 1.809 ms","timestamp":"2026-06-18 12:36:49"}
+{"level":"warn","message":"SMTP settings not found. Fallback configured to Ethereal Email sandbox.","timestamp":"2026-06-18 12:37:14"}
+{"level":"warn","message":"Stripe SECRET_KEY is not defined. Stripe payments will operate in sandbox emulation.","timestamp":"2026-06-18 12:37:15"}
+{"level":"warn","message":"Razorpay KEY_ID/SECRET not defined. Razorpay payments will operate in sandbox emulation.","timestamp":"2026-06-18 12:37:15"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-18 12:37:15"}
+{"level":"info","message":"Socket connected: yV4ltMgmQs4VHtAvAAAB","timestamp":"2026-06-18 12:37:16"}
+{"level":"info","message":"Socket connected: iyFg7dBYXlYrm8AOAAAD","timestamp":"2026-06-18 12:37:17"}
+{"level":"info","message":"GET / 200 107 - 4.814 ms","timestamp":"2026-06-18 12:37:35"}
+{"level":"info","message":"GET / 200 107 - 0.804 ms","timestamp":"2026-06-18 12:37:43"}
+{"level":"info","message":"GET /favicon.ico 404 150 - 24.713 ms","timestamp":"2026-06-18 12:37:44"}
+{"level":"info","message":"GET / 200 107 - 15.479 ms","timestamp":"2026-06-18 12:39:09"}
+{"level":"info","message":"Socket disconnected: iyFg7dBYXlYrm8AOAAAD","timestamp":"2026-06-18 12:41:47"}
+{"level":"info","message":"Socket disconnected: yV4ltMgmQs4VHtAvAAAB","timestamp":"2026-06-18 12:43:25"}
+{"level":"info","message":"Socket connected: XanKK2BG867XcxYbAAAG","timestamp":"2026-06-18 12:43:26"}
+{"level":"info","message":"GET /api/categories 200 785 - 105.978 ms","timestamp":"2026-06-18 12:43:26"}
+{"level":"info","message":"GET /api/products?ratings=4&page=1 200 65 - 373.488 ms","timestamp":"2026-06-18 12:43:26"}
+{"level":"info","message":"GET /api/categories 304 - - 42.063 ms","timestamp":"2026-06-18 12:43:26"}
+{"level":"info","message":"GET /api/products?ratings=4&page=1 304 - - 28.300 ms","timestamp":"2026-06-18 12:43:26"}
+{"level":"info","message":"Socket disconnected: XanKK2BG867XcxYbAAAG","timestamp":"2026-06-18 12:43:30"}
+{"level":"info","message":"Socket connected: x-H_j9zf8ssefAUjAAAJ","timestamp":"2026-06-18 12:43:30"}
+{"level":"info","message":"GET /api/categories 304 - - 88.383 ms","timestamp":"2026-06-18 12:43:30"}
+{"level":"info","message":"GET /api/products?ratings=4&page=1 304 - - 118.231 ms","timestamp":"2026-06-18 12:43:30"}
+{"level":"info","message":"GET /api/categories 304 - - 40.240 ms","timestamp":"2026-06-18 12:43:30"}
+{"level":"info","message":"GET /api/products?ratings=4&page=1 304 - - 38.372 ms","timestamp":"2026-06-18 12:43:30"}
+{"level":"info","message":"Socket connected: 8eTPGHN-9ryWZRnsAAAM","timestamp":"2026-06-18 12:43:40"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 539.233 ms","timestamp":"2026-06-18 12:43:40"}
+{"level":"info","message":"GET /api/categories 304 - - 95.551 ms","timestamp":"2026-06-18 12:43:40"}
+{"level":"info","message":"GET /api/categories 304 - - 147.429 ms","timestamp":"2026-06-18 12:43:40"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 187.018 ms","timestamp":"2026-06-18 12:43:40"}
+{"level":"info","message":"GET /api/categories 304 - - 64.714 ms","timestamp":"2026-06-18 12:43:57"}
+{"level":"info","message":"GET /api/categories 304 - - 3.756 ms","timestamp":"2026-06-18 12:43:57"}
+{"level":"info","message":"GET /api/products? 304 - - 90.540 ms","timestamp":"2026-06-18 12:43:57"}
+{"level":"info","message":"GET /api/products? 304 - - 117.124 ms","timestamp":"2026-06-18 12:43:57"}
+{"level":"info","message":"GET /api/cart?guestId=guest_ez32uodrzpnwbnpcai8snn 200 208 - 55.424 ms","timestamp":"2026-06-18 12:44:47"}
