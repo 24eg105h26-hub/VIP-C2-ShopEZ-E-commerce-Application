@@ -1,0 +1,148 @@
+
+
+VIP C2 PROGRAMME — FULL STACK DEVELOPMENT WITH
+MERN
+Solution Architecture
+ShopEZ — MERN Stack E-commerce Application
+Phase: Project Design Phase
+Document Version: 1.1
+Date: 18th of june, 2026
+Prepared by: V S S S Manikanta
+Classification: Project Documentation — For Academic Submission
+
+Solution Architecture
+1. Layered System Architecture
+External ServicesLayer 4 — Data Access (ODM + Database)
+Layer 3 — Business Logic (Controllers)
+Layer 2 — API Gateway & Middleware (Server)
+Layer 1 — Presentation (Client)
+HTTPS REST
+Payment APIUpload API
+Stripe / Razorpay (Payment)Cloudinary (Image CDN)Mongoose ODM (Schema, hooks, populate)
+MongoDB Atlas — Collections: users, products, orders, categories, carts, reviews
+User Controller (register, login, profile)Product Controller (CRUD, search, filter)Order Controller (create, pay, fulfill)Cart Controller (add, update, remove)
+Express.js Router (/api/users, /api/products, /api/orders)
+JWT Auth Middleware (protect + isAdmin)
+Global Error Handler Middleware
+Web Browser
+React.js v18 (SPA)
+Context API / Redux Toolkit (Global State)Axios HTTP Client
+FIGURE 9.1 — 4-LAYER SYSTEM ARCHITECTURE DIAGRAM
+
+2. MVC Pattern Mapping
+MVC
+Layer
+MERN
+Component
+Responsibilities
+ViewReact.js
+(Frontend SPA)
+Renders UI components; manages
+local state; dispatches API calls via
+Axios; updates global state via
+Context/Redux
+ControllerExpress.js
+Controllers
+Receives validated HTTP requests;
+orchestrates business logic; invokes
+Model methods; formats and returns
+JSON responses
+ModelMongoose
+Schemas &
+Models
+Defines data structure, validation rules,
+and type constraints; executes
+lifecycle hooks; interfaces with
+MongoDB Atlas
+
+3. UML Class Diagram — Mongoose Models
+places
+1
+0..*
+owns
+1
+1
+writes
+1
+0..*
+receives
+1
+0..*
+classifies
+1
+0..*
+UserModel
++ObjectId _id
++String name
++String email
++String password
++String role
++Array addresses
++matchPassword(entered) : Boolean
++pre_save_hook() : void
+ProductModel
++ObjectId _id
++String name
++Number price
++Number stock
++Number rating
++ObjectId category
++Array images
++Array reviews
+OrderModel
++ObjectId _id
++ObjectId user
++Array orderItems
++Object shippingAddress
++Number totalPrice
++Boolean isPaid
++String orderStatus
+CartModel
++ObjectId _id
++ObjectId user
++Array items
++Date updatedAt
+CategoryModel
++ObjectId _id
++String name
++String slug
+ReviewModel
++ObjectId _id
++ObjectId user
++ObjectId product
++Number rating
++String comment
+FIGURE 9.2 — UML CLASS DIAGRAM: MONGOOSE DATA MODELS
+
+4. Deployment Topology
+HTTPSAPI Calls (HTTPS + CORS)
+TLS / Mongoose
+REST API
+REST API
+ End User (Browser)☁ Vercel CDN (React SPA — static files) Render (Node.js / Express API — Port 8000)
+ MongoDB Atlas (Cloud Cluster)
+ Cloudinary (Image CDN)
+ Stripe / Razorpay (Payment API)
+FIGURE 9.3 — CLOUD DEPLOYMENT TOPOLOGY
+5. Deployment URL Reference
+ComponentPlatformURL
+Frontend
+(React SPA)
+Vercel
+https://e-commerce-
+application-neon-
+five.vercel.app/
+Backend
+(Node.js API)
+Render
+https://shopez-api-
+c30e.onrender.com
+DatabaseMongoDB
+Atlas
+Cloud-hosted (M0 Free Tier)
+Image
+Storage
+Cloudinary
+res.cloudinary.com///.
+ShopEZ MERN E-commerce Application · Project Design Phase · Solution Architecture ·
+v1.1 · June 2026

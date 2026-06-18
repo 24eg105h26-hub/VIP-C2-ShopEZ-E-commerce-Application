@@ -1,0 +1,215 @@
+
+
+VIP C2 PROGRAMME — FULL STACK DEVELOPMENT WITH
+MERN
+Brainstorming & Idea Prioritisation
+ShopEZ — MERN Stack E-commerce Application
+Phase: Brainstorming & Ideation Phase
+Document Version: 1.1
+Date: 18th of june, 2026
+Prepared by: V S S S Manikanta
+Classification: Project Documentation — For Academic Submission
+
+Brainstorming & Idea
+Prioritisation
+1. Introduction
+This document records the structured brainstorming and ideation process undertaken at
+the inception of the ShopEZ project. The objective of this phase was to collaboratively
+identify  user  pain  points,  generate  candidate  solutions,  and  systematically  prioritise
+features  using  established  frameworks.  The  output  directly  informs  the  Problem
+Statement Definition and Requirement Analysis phases.
+2. Problem Statement Selection
+Small and medium-sized businesses lack the technical resources to establish a
+customised, scalable online storefront, while end-consumers demand a seamless,
+fast, and secure shopping experience — encompassing intuitive search, dynamic
+filtering, persistent cart state, and trusted multi-gateway payment processing.
+
+3. Idea Generation & Grouping
+3.1 Raw Idea Listing
+Idea
+ID
+Idea DescriptionCategoryRetained?
+I-01Build a custom MERN
+stack application for full
+architectural control
+Core
+Architecture
+✅ Yes
+I-02Use Shopify as a SaaS
+platform
+Existing
+Platforms
+❌ Discarded —
+insufficient
+customisability
+I-03Use WooCommerce
+(WordPress)
+Existing
+Platforms
+❌ Discarded —
+plugin overhead,
+no SPA support
+I-04Implement JWT-based
+stateless authentication
+with HTTP-only cookies
+Security✅ Yes
+I-05Integrate a Payment
+Gateway (Stripe /
+Razorpay)
+Payments✅ Yes
+I-06Use Cloudinary CDN for
+optimised media/image
+storage
+Media
+Management
+✅ Yes
+I-07Implement Role-Based
+Access Control (Admin
+vs. Customer)
+Access
+Control
+✅ Yes
+I-08Build an interactive
+Admin Dashboard with
+real-time sales metrics
+Admin
+Operations
+✅ Yes
+
+Idea
+ID
+Idea DescriptionCategoryRetained?
+I-09Persist shopping cart
+state using MongoDB
+for cross-device
+continuity
+User
+Experience
+✅ Yes
+I-10Implement AI-driven
+product
+recommendations
+Advanced
+Features
+ Future Scope
+I-11Multi-vendor supportMarketplace
+Features
+ Future Scope
+3.2 Idea Grouping — Affinity Diagram
+ShopEZ Platform
+Core Architecture
+I-01
+I-04
+I-07
+Customer Experience
+I-09
+I-05
+Advanced Search and Filtering
+Admin and Operations
+I-08
+I-06
+Order Fulfillment Management
+Future Scope
+I-10
+I-11
+FIGURE 1.1 — AFFINITY / MIND-MAP: IDEA GROUPING BY DOMAIN
+
+4. Idea Prioritisation — MoSCoW Framework
+PriorityClassificationFeature / IdeaRationale
+Must
+Have
+Core —
+Release 1
+User Registration &
+JWT Authentication
+Foundational to
+all user-specific
+operations
+Must
+Have
+Core —
+Release 1
+Product Catalogue
+(CRUD Operations)
+Primary
+business
+function; no
+storefront
+without it
+Must
+Have
+Core —
+Release 1
+Shopping Cart
+(Add, Update,
+Remove)
+Essential to
+purchase flow
+Must
+Have
+Core —
+Release 1
+Multi-Step
+Checkout Flow
+Core revenue-
+generating
+pathway
+Must
+Have
+Core —
+Release 1
+Payment Gateway
+Integration
+Order
+completion
+requires
+payment
+confirmation
+Should
+Have
+Release 1Admin Dashboard
+(Sales Charts)
+Enables
+business
+decision-making
+Should
+Have
+Release 1Product Reviews &
+Ratings
+Builds consumer
+trust and aids
+discovery
+Should
+Have
+Release 1Cloudinary Image
+Management
+Improves
+performance;
+required for
+scalable image
+serving
+
+PriorityClassificationFeature / IdeaRationale
+Could
+Have
+Release 2Wishlist
+Functionality
+Improves
+retention, not
+blocking to
+launch
+Could
+Have
+Release 2AI Product
+Recommendations
+Non-trivial to
+implement;
+deferred to
+future roadmap
+5. Conclusion
+The brainstorming phase successfully distilled the project vision into a focused set of
+prioritised  deliverables.  The Must Have  features  constitute  the  minimum  viable
+product (MVP) scope for Sprint 1 and Sprint 2. All accepted ideas map directly to User
+Stories defined in the Requirement Analysis phase.
+ShopEZ MERN E-commerce Application · Brainstorming & Ideation Phase ·
+Brainstorming & Idea Prioritisation · v1.1 · June 2026

@@ -1,0 +1,308 @@
+
+
+VIP C2 PROGRAMME — FULL STACK DEVELOPMENT WITH
+MERN
+Project Planning
+ShopEZ — MERN Stack E-commerce Application
+Phase: Project Planning Phase
+Document Version: 1.1
+Date: 18th of june, 2026
+Prepared by: V S S S Manikanta
+Classification: Project Documentation — For Academic Submission
+
+Project Planning
+1. Introduction
+This document formalises the project planning artefacts for the ShopEZ development
+initiative. It encompasses the Product Backlog, Sprint Schedule with Story Point
+estimates, a Sprint Timeline (Gantt Chart), Velocity Tracking, Burndown Analysis, and
+a Risk Register. The planning framework adopted is Scrum-based Agile, executed in
+three two-week sprints.
+
+2. Product Backlog & Sprint Schedule
+SprintEpicUSN
+User Story
+/ Task
+PointsPriority
+Sprint
+1
+Project
+Setup & DB
+USN-
+0
+Initialise
+React
+frontend,
+Node.js
+backend,
+and
+configure
+MongoDB
+Atlas
+models
+3High
+Sprint
+1
+User AuthUSN-
+1
+User can
+register with
+email,
+name, and
+password
+and receive
+a JWT
+session
+2High
+Sprint
+1
+User AuthUSN-
+2
+User can
+log in with
+credentials
+and be
+granted a
+JWT in an
+HTTP-only
+cookie
+2High
+Sprint
+1
+Product
+Catalogue
+USN-
+3
+Admin can
+create, edit,
+and delete
+product
+listings with
+Cloudinary
+3High
+
+SprintEpicUSN
+User Story
+/ Task
+PointsPriority
+image
+uploads
+Sprint
+2
+Shopping
+Cart
+USN-
+4
+User can
+add, update,
+and remove
+items; cart
+persists
+across
+devices
+3High
+Sprint
+2
+Checkout
+Flow
+USN-
+5
+User can
+complete a
+3-step
+checkout
+(Address →
+Payment
+Method →
+Confirm
+Order)
+3High
+Sprint
+2
+PaymentUSN-
+6
+User can
+pay via
+Stripe /
+Razorpay
+and receive
+order
+confirmation
+5High
+Sprint
+3
+Order
+Management
+USN-
+7
+Admin can
+view all
+orders and
+update
+delivery
+status
+2Medium
+Sprint
+3
+ReviewsUSN-
+8
+User can
+leave a star
+rating and
+2Medium
+
+SprintEpicUSN
+User Story
+/ Task
+PointsPriority
+text review
+on a
+purchased
+product
+Sprint
+3
+Admin
+Dashboard
+USN-
+9
+Admin can
+view
+monthly
+revenue
+charts and
+sales metric
+summaries
+3Medium
+3. Sprint Timeline — Gantt Chart
+2026-06-072026-06-142026-06-212026-06-282026-07-052026-07-12
+Project Setup and MongoDB Config
+User Authentication (Register & Login)
+Product Catalogue (CRUD + Cloudinary)
+Shopping Cart (Persist + CRUD)
+Multi-Step Checkout Flow
+Payment Gateway Integration
+Admin Order Management
+Product Reviews and Ratings
+Admin Sales Dashboard
+Sprint 1 — Foundation
+Sprint 2 — Core Commerce
+Sprint 3 — Operations
+ShopEZ Sprint Delivery Timeline
+FIGURE 3.1 — GANTT CHART: SPRINT DELIVERY TIMELINE (3
+SPRINTS × 2 WEEKS)
+
+4. Velocity & Project Tracker
+Sprint
+Story
+Points
+Start
+Date
+End
+Date
+CompletedRate
+Sprint
+1
+1001 June
+2026
+14 June
+2026
+10100%
+✅
+Sprint
+2
+1115 June
+2026
+28 June
+2026
+11100%
+✅
+Sprint
+3
+729 June
+2026
+12 July
+2026
+7100%
+✅
+Total28——28100%
+✅
+Average Velocity: 9.3 Story Points per Sprint | Sprint Duration: 2 Weeks
+
+5. Risk Register
+Risk
+ID
+Risk
+Description
+ProbabilityImpact
+Mitigation
+Strategy
+R-01Payment
+gateway API
+downtime
+during testing
+MediumHighUse Stripe test
+mode
+(sk_test_*);
+maintain fallback
+mock handler
+R-
+02
+MongoDB
+Atlas
+connection
+failure in
+production
+LowHighConfigure
+automatic
+reconnect logic;
+monitor via Atlas
+alerts
+R-
+03
+Cloudinary
+storage limit
+exceeded
+LowMediumSet file size limits in
+upload middleware;
+configure usage
+alerts
+R-
+04
+JWT secret
+key exposed
+via public
+repository
+LowCriticalStore all secrets in
+.env (git-
+ignored); enforce
+secret scanning
+R-
+05
+Cart state
+desync on
+concurrent
+multi-device
+login
+MediumMediumServer-side cart
+reconciliation on
+login; use
+updatedAt
+timestamps
+R-
+06
+React build
+size
+impacting
+initial load
+time
+MediumMediumImplement
+React.lazy()
+code-splitting;
+enable Gzip on
+server
+
+6. Conclusion
+The Agile sprint framework provided the V S S S Manikanta with a structured, iterative
+approach to delivery. All 28 story points were completed within the planned six-week
+timeline, with a 100% completion rate across all three sprints.
+ShopEZ MERN E-commerce Application · Project Planning Phase · Project Planning · v1.1
+· June 2026

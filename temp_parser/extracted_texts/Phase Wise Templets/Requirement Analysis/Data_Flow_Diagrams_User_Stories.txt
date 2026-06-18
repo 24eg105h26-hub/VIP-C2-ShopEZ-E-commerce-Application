@@ -1,0 +1,275 @@
+
+
+VIP C2 PROGRAMME — FULL STACK DEVELOPMENT WITH
+MERN
+Data Flow Diagrams & User Stories
+ShopEZ — MERN Stack E-commerce Application
+Phase: Requirement Analysis Phase
+Document Version: 1.1
+Date: 18th of june, 2026
+Prepared by: V S S S Manikanta
+Classification: Project Documentation — For Academic Submission
+
+Data Flow Diagrams & User
+Stories
+1. Introduction
+This document presents the Data Flow Diagrams (DFDs) and formal User Stories for
+the  ShopEZ  platform.  DFDs  model  the  system  at  two  abstraction  levels  —  Context
+Level  (Level  0)  and  Functional  Decomposition  (Level  1)  —  illustrating  data  flows
+between actors, processes, and data stores.
+2. Level 0 — Context Diagram
+Login Credentials, Search Queries, Cart Actions, Order Details
+Product Catalogue, Cart State, Order Confirmations
+Product Data, Category Data, Order Status Updates
+Sales Metrics, Order Lists, Platform Reports
+Payment Request
+Payment Success / Failure
+Image Upload Request
+Hosted Image URL
+ Customer
+ Administrator
+ Payment Gateway
+ Cloudinary CDN
+ ShopEZ E-commerce System
+FIGURE 6.1 — LEVEL 0: CONTEXT DIAGRAM (SYSTEM AS BLACK
+BOX)
+
+3. Level 1 — Authentication Sub-Process
+email, password, name
+Hash password (Bcrypt)Validate credentialsUser record
+JWT Token (HTTP-only Cookie)
+ Customer
+Process 1.0 — User Authentication
+ DS-1: Users Collection (MongoDB)
+FIGURE 6.2 — LEVEL 1: AUTHENTICATION PROCESS DFD
+4. Level 1 — Shopping & Order Placement Sub-
+Process
+Search query / filters
+Product list
+Product resultsAdd/Update/Remove itemUpdated cartShipping address, payment method
+Verify stockPayment requestPayment confirmationWrite order recordDeduct stockClear cart
+Order confirmation
+ Customer
+Process 2.1 — Product Search & BrowseProcess 2.2 — Cart ManagementProcess 2.3 — Checkout & Order Creation
+ DS-2: Products Collection DS-3: Cart Collection DS-4: Orders Collection Payment Gateway
+FIGURE 6.3 — LEVEL 1: SHOPPING & ORDER PLACEMENT DFD
+
+5. User Stories
+USN
+User
+Type
+User Story
+Acceptance
+Criteria
+PointsSprint
+USN-
+1
+CustomerAs a
+customer, I
+can register
+by entering
+my name,
+email, and
+password.
+Account
+created in
+DB;
+redirected to
+dashboard;
+duplicate
+email returns
+400.
+2Sprint
+1
+USN-
+2
+CustomerAs a
+customer, I
+can log in
+using my
+registered
+email and
+password.
+JWT issued
+in HTTP-only
+cookie;
+incorrect
+credentials
+return 401.
+2Sprint
+1
+USN-
+3
+CustomerAs a
+customer, I
+can search
+and filter
+products by
+category,
+price, and
+rating.
+Results
+accurately
+reflect filters;
+update
+without full
+page reload.
+3Sprint
+1
+USN-
+4
+CustomerAs a
+customer, I
+can add,
+remove, and
+update
+quantities in
+my cart.
+Cart total
+updates in
+real time; cart
+persists
+across
+sessions and
+devices.
+3Sprint
+2
+
+USN
+User
+Type
+User Story
+Acceptance
+Criteria
+PointsSprint
+USN-
+5
+CustomerAs a
+customer, I
+can
+complete a
+guided
+checkout by
+entering
+shipping
+and
+payment
+details.
+All three
+checkout
+steps
+navigable;
+address
+validated
+before
+proceeding.
+3Sprint
+2
+USN-
+6
+CustomerAs a
+customer, I
+can
+securely
+pay via an
+integrated
+payment
+gateway.
+Payment
+processed;
+order status
+changes to
+"Paid"; stock
+deducted;
+confirmation
+shown.
+5Sprint
+2
+USN-
+7
+CustomerAs a
+customer
+who has
+completed a
+purchase, I
+can leave a
+star rating
+and review.
+Review
+appears on
+the product
+page;
+aggregate
+rating
+recalculated.
+2Sprint
+3
+USN-
+8
+AdminAs an
+admin, I can
+add, edit,
+and delete
+product
+listings with
+Cloudinary
+Changes
+reflect
+immediately
+on storefront;
+images
+served via
+CDN URL.
+3Sprint
+1
+
+USN
+User
+Type
+User Story
+Acceptance
+Criteria
+PointsSprint
+image
+uploads.
+USN-
+9
+AdminAs an
+admin, I can
+view all
+orders and
+update their
+delivery
+status.
+Status
+transitions:
+Processing
+→ Shipped →
+Delivered;
+reflected in
+customer's
+order history.
+2Sprint
+3
+USN-
+10
+AdminAs an
+admin, I can
+view
+aggregated
+sales
+metrics and
+monthly
+revenue
+charts.
+Dashboard
+shows
+accurate total
+revenue,
+order count,
+and monthly
+breakdown.
+3Sprint
+3
+ShopEZ MERN E-commerce Application · Requirement Analysis Phase · Data Flow
+Diagrams & User Stories · v1.1 · June 2026

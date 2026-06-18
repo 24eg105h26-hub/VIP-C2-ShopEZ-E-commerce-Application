@@ -1,0 +1,340 @@
+
+
+VIP C2 PROGRAMME — FULL STACK DEVELOPMENT WITH
+MERN
+User Acceptance Testing (UAT)
+ShopEZ — MERN Stack E-commerce Application
+Phase: Project Development Phase
+Document Version: 1.1
+Date: 18th of june, 2026
+Prepared by: V S S S Manikanta
+Classification: Project Documentation — For Academic Submission
+
+User Acceptance Testing (UAT)
+1. Introduction
+This  document  defines  the  UAT  strategy,  process,  and  test  cases  for  the  ShopEZ
+platform. UAT is the final validation phase confirming that the delivered system meets
+business requirements and is ready for production release.
+Live Application:https://e-commerce-application-neon-
+five.vercel.app/
+Test Environment: Chrome v120+ / Edge v120+ (desktop and
+mobile viewports)
+
+2. UAT Process Flow
+✅ All Pass❌ Fail
+ Review Requirements & User Stories
+Prepare UAT Test Cases (Mapped to FR / USN)
+Configure Test Environment (Seed DB, Credentials)
+Execute Test Cases (Manual / Exploratory)
+Pass?
+Document Results & Sign-offRaise Defect Report
+Developer Fixes Defect Release Approval
+FIGURE 10.1 — UAT PROCESS FLOWCHART
+
+3. Test Credentials
+RoleEmailPassword
+Administrator
+admin@shopez.comadminpassword123
+Customer
+test@email.compassword123
+4. UAT Test Cases
+4.1 Authentication Module
+Test
+ID
+ScenarioSteps
+Expected
+Result
+Status
+UAT-
+001
+New User
+Registration
+1. Go to
+/register. 2.
+Enter valid
+name, email,
+password. 3.
+Submit.
+Account
+created;
+redirected to
+dashboard;
+toast shown.
+☐ Pass
+/ Fail
+UAT-
+002
+Duplicate
+Email
+Rejection
+1. Register with
+an already-used
+email. 2.
+Submit.
+Error: "User
+already exists."
+Registration
+prevented.
+☐ Pass
+/ Fail
+UAT-
+003
+Valid User
+Login
+1. Go to /login.
+2. Enter valid
+credentials. 3.
+Submit.
+JWT set;
+redirected;
+Navbar shows
+user name.
+☐ Pass
+/ Fail
+UAT-
+004
+Invalid
+Credentials
+Rejection
+1. Enter wrong
+password. 2.
+Submit.
+HTTP 401;
+error: "Invalid
+email or
+password."
+☐ Pass
+/ Fail
+
+4.2 Product Discovery Module
+Test
+ID
+ScenarioStepsExpected ResultStatus
+UAT-
+005
+Keyword
+Search
+1. Enter "Shirt"
+in search bar.
+2. Press Enter.
+Only products
+containing "Shirt"
+in
+name/description
+displayed.
+☐
+Pass /
+Fail
+UAT-
+006
+Category
+& Price
+Filter
+1. Select
+Category =
+"Electronics".
+2. Set Price =
+₹500–₹5,000.
+Only Electronics in
+the price range
+displayed.
+☐
+Pass /
+Fail
+UAT-
+007
+Sort Price
+Ascending
+1. Select Sort =
+"Price: Low to
+High".
+Products re-
+ordered with
+lowest price first.
+☐
+Pass /
+Fail
+
+4.3 Shopping Cart Module
+Test
+ID
+ScenarioStepsExpected ResultStatus
+UAT-
+008
+Add to
+Cart
+1. Open
+product page.
+2. Select
+qty=2. 3. Click
+"Add to Cart".
+Cart badge
+increments; cart
+shows item with
+correct qty and
+total.
+☐ Pass
+/ Fail
+UAT-
+009
+Update
+Cart
+Quantity
+1. Open Cart. 2.
+Change qty of
+an item.
+Subtotal and qty
+update in real time
+without page
+reload.
+☐ Pass
+/ Fail
+UAT-
+010
+Remove
+Item from
+Cart
+1. Open Cart. 2.
+Click
+"Remove".
+Item removed;
+total recalculated;
+empty cart
+message if no
+items remain.
+☐ Pass
+/ Fail
+
+4.4 Checkout & Payment Module
+Test
+ID
+ScenarioStepsExpected ResultStatus
+UAT-
+011
+Full
+Checkout
+Flow
+1. Add item. 2.
+Checkout. 3.
+Enter shipping. 4.
+Enter test card
+4242 4242
+4242 4242. 5.
+Place order.
+Order created;
+stock deducted;
+confirmation
+page shown;
+order in history.
+☐ Pass
+/ Fail
+UAT-
+012
+Payment
+Failure
+Handling
+1. Enter Stripe
+declined card
+4000 0000
+0000 9995 at
+payment step.
+Error shown;
+order NOT
+created; stock
+NOT deducted.
+☐ Pass
+/ Fail
+
+4.5 Admin Operations Module
+Test
+ID
+ScenarioSteps
+Expected
+Result
+Status
+UAT-
+013
+Admin
+Product
+Creation
+1. Log in as
+Admin. 2.
+Admin →
+Products →
+"Create". 3. Fill
+fields & upload
+image. 4.
+Submit.
+Product visible
+in public
+catalogue;
+image served
+from
+Cloudinary
+CDN.
+☐ Pass
+/ Fail
+UAT-
+014
+Admin
+Product
+Update
+1. Open existing
+product in
+Admin. 2. Edit
+price. 3. Save.
+Updated price
+reflected on
+public product
+page.
+☐ Pass
+/ Fail
+UAT-
+015
+Admin Order
+Status Update
+1. Admin →
+Orders. 2.
+Change order
+status to
+"Shipped".
+Status update
+reflected in
+customer's
+order history.
+☐ Pass
+/ Fail
+UAT-
+016
+Unauthorised
+Admin Access
+1. Log in as
+Customer. 2.
+Navigate to
+/admin directly.
+Access denied;
+customer
+redirected with
+appropriate
+error message.
+☐ Pass
+/ Fail
+
+5. Results Summary
+ModuleTotal TestsPassedFailedPass Rate
+Authentication4
+Product Discovery3
+Shopping Cart3
+Checkout & Payment2
+Admin Operations4
+Total16
+6. UAT Sign-Off
+RoleNameSignatureDate
+Development Lead
+QA Reviewer
+Product Owner / Stakeholder
+We confirm that the ShopEZ application has been tested against all
+defined User Acceptance criteria and is approved for production
+release.
+ShopEZ MERN E-commerce Application · Project Development Phase · User Acceptance
+Testing (UAT) · v1.1 · June 2026

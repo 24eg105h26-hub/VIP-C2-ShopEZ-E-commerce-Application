@@ -1,0 +1,183 @@
+
+
+VIP C2 PROGRAMME — FULL STACK DEVELOPMENT WITH
+MERN
+Technology Stack
+ShopEZ — MERN Stack E-commerce Application
+Phase: Requirement Analysis Phase
+Document Version: 1.1
+Date: 18th of june, 2026
+Prepared by: V S S S Manikanta
+Classification: Project Documentation — For Academic Submission
+
+Technology Stack
+1. Introduction
+This document provides a formal specification of the technology stack selected for the
+ShopEZ  platform.  Each  technology  selection  is  accompanied  by  its  architectural  role,
+justification, and a brief Architecture Decision Record (ADR) summarising the decision
+rationale and alternatives considered.
+2. Integration Architecture Diagram
+External ServicesData Layer
+Server Layer (Node.js Runtime)
+Client Layer (Browser)
+HTTPS REST API
+API CallUpload API
+Stripe / Razorpay — Payment GatewayCloudinary — CDN Image HostingMongoose ODM — Schema & Validation
+MongoDB Atlas — NoSQL Document Store
+Express.js — REST API Framework
+JSON Web Tokens — Auth & SessionBcrypt.js — Password Hashing
+React.js v18 — SPA UI Rendering
+Context API / Redux Toolkit — State ManagementAxios — HTTP Client
+FIGURE 5.1 — TECHNOLOGY STACK INTEGRATION ARCHITECTURE
+DIAGRAM
+
+3. Detailed Stack Breakdown
+LayerTechnologyVersionPurpose & Justification
+Frontend
+Framework
+React.jsv18.xComponent-driven SPA
+architecture. Virtual DOM
+ensures efficient,
+targeted UI re-rendering.
+Hooks-based API
+enables clean functional
+component design.
+State
+Management
+Context API /
+Redux
+Toolkit
+v2.xCentralised global state
+for authentication
+context, shopping cart,
+and cached API data.
+Redux Toolkit reduces
+boilerplate via
+createSlice.
+HTTP ClientAxiosv1.xPromise-based HTTP
+client with
+request/response
+interceptors, automatic
+JSON serialisation, and
+configurable base URL.
+Preferred over native
+fetch for interceptor
+support.
+Backend
+Runtime
+Node.jsv18 LTSJavaScript runtime
+enabling full-stack
+single-language
+development. Non-
+blocking, event-driven
+I/O suits concurrent API
+request handling.
+Backend
+Framework
+Express.jsv4.xMinimal, unopinionated
+framework providing
+
+LayerTechnologyVersionPurpose & Justification
+robust middleware
+composition, route
+parameterisation, and
+structured error handling
+for RESTful APIs.
+AuthenticationJSON Web
+Tokens
+(JWT)
+RFC
+7519
+Stateless, self-contained
+bearer tokens signed with
+a server secret. Stored in
+HTTP-only cookies to
+mitigate XSS. Enables
+horizontal API scaling
+without shared session
+storage.
+Password
+Security
+Bcrypt.jsv5.xIndustry-standard
+adaptive hashing (salt
+rounds ≥ 10). Applied via
+Mongoose pre-save
+hook on the User model.
+DatabaseMongoDB
+(Atlas)
+v6.xDocument-oriented
+NoSQL store for flexible
+schema design. Hosted
+on Atlas for managed
+backups and auto-
+scaling.
+ODMMongoosev8.xSchema-based ODM
+providing validation, type
+enforcement, virtual
+fields, populate
+references, and lifecycle
+hooks.
+
+LayerTechnologyVersionPurpose & Justification
+Payment
+Gateway
+Stripe /
+Razorpay
+LatestPCI-DSS compliant
+payment APIs. No
+sensitive financial data
+stored on the ShopEZ
+server.
+Media HostingCloudinaryv2.x
+SDK
+Provides automatic image
+compression, WebP
+conversion, and CDN
+delivery. Eliminates local
+filesystem dependency.
+DeploymentVercel (FE) /
+Render (BE)
+—Vercel provides React
+deployment with global
+CDN edge caching.
+Render hosts Node.js API
+with auto-deploy on Git
+push.
+
+4. Architecture Decision Records (ADRs)
+ADR-01: MongoDB over Relational Database
+FieldDetail
+Status✅ Accepted
+ContextThe product catalogue requires a flexible schema —
+product attributes vary significantly across categories.
+DecisionAdopt MongoDB as the primary data store.
+JustificationDocument-based storage natively accommodates
+variable product attributes without migration-heavy
+ALTER TABLE operations.
+ConsequencesNo multi-document ACID transactions by default.
+Mitigated by Mongoose document-level atomicity for
+order creation and stock deduction.
+ADR-02: JWT in HTTP-only Cookies over localStorage
+FieldDetail
+Status✅ Accepted
+DecisionStore JWT in HTTP-only, SameSite=Strict cookies
+rather than localStorage.
+Justification
+localStorage is fully accessible by JavaScript,
+making it vulnerable to XSS. HTTP-only cookies are
+inaccessible to client-side scripts.
+Consequences
+CSRF mitigation required via SameSite=Strict
+attribute and CORS configuration.
+
+ADR-03: Cloudinary over Local File Storage
+FieldDetail
+Status✅ Accepted
+DecisionUse Cloudinary's cloud image management platform.
+JustificationProvides automatic resizing, WebP conversion, and
+global CDN. Eliminates reliance on application server's
+ephemeral filesystem (Render).
+ConsequencesExternal API dependency and storage cost. Mitigated
+by enforcing file size limits in upload middleware.
+ShopEZ MERN E-commerce Application · Requirement Analysis Phase · Technology
+Stack · v1.1 · June 2026

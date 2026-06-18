@@ -1,0 +1,301 @@
+
+
+VIP C2 PROGRAMME — FULL STACK DEVELOPMENT WITH
+MERN
+Empathy Map Canvas
+ShopEZ — MERN Stack E-commerce Application
+Phase: Brainstorming & Ideation Phase
+Document Version: 1.1
+Date: 11 June 2026
+Prepared by: V S S S Manikanta
+Classification: Project Documentation — For Academic Submission
+
+Empathy Map Canvas
+1. Introduction
+This document presents the Empathy Map Canvas for the two primary user personas
+of the ShopEZ platform. Empathy mapping is a collaborative design-thinking tool used
+to articulate a deep understanding of the target users' mental models, motivations, pain
+points,  and  desired  gains  —  ensuring  that  design  and  development  decisions  remain
+grounded in genuine user needs rather than assumptions.
+Two distinct personas have been profiled: the Convenience-Seeking Shopper (B2C end-
+consumer)  and  the Operationally-Stretched Store Administrator  (B2B  operator).  Each
+persona is analysed across six dimensions: Think & Feel, Hear, See, Say & Do, Pains, and
+Gains.
+2. Persona 1 — "The Convenience-Seeking
+Shopper"
+PERSONA 1
+Name: The Convenience-Seeking Shopper
+Profile:  Urban  professional,  24–40  years  of  age,  technologically  proficient.
+Shops online 3–6 times per month across devices (mobile and desktop). Values
+speed, security, and a frictionless purchasing experience above all else.
+
+2.1 Empathy Map — Quadrant Chart
+FIGURE 1.1 — EMPATHY MAP QUADRANT CHART: PERSONA 1 —
+THE CONVENIENCE-SEEKING SHOPPER
+SAY & DO (NEGATIVE)SAY & DO (POSITIVE)
+THINK & FEEL (NEGATIVE)THINK & FEEL (POSITIVE)
+External (Say / Do)
+Internal (Think / Feel)
+N
+e
+g
+a
+t
+i
+v
+e
+ 
+E
+x
+p
+e
+r
+i
+e
+n
+c
+e
+P
+o
+s
+i
+t
+i
+v
+e
+ 
+E
+x
+p
+e
+r
+i
+e
+n
+c
+e
+Filters by price & rating
+Saves cart for later
+Reads reviews first
+Abandons cart (many steps)
+Cannot find product category
+Anxious about hidden fees
+Worried about card safety
+Frustrated by slow loading
+Feels secure with payments
+Expects fast search
+
+2.2 Detailed Dimension Analysis
+易 THINK & FEEL
+"I hope this website is genuinely
+secure with my credit card
+information."
+"I need to find what I'm looking
+for within the first two minutes
+— otherwise, I'm leaving."
+Experiences anxiety regarding
+undisclosed shipping fees at the
+final checkout step.
+Feels relief and purchase
+confidence when product
+pages feature high-resolution
+images, verified reviews, and
+clear stock indicators.
+ HEAR
+"You should try this platform —
+it delivered within 48 hours
+and the return process was
+effortless."
+"Always check the reviews before
+committing to a purchase."
+"Is the payment integration
+secure? Did they verify with a
+gateway?"
+Peer recommendations heavily
+influence first-time platform
+adoption decisions.
+
+ SEE
+Competitor platforms with
+cluttered, information-dense
+product listing pages.
+Retargeted advertisements
+across social media for
+previously-viewed items.
+Clean, modern, mobile-first
+interfaces on market-leading e-
+commerce platforms.
+Inconsistent typography and
+layout on less-polished
+competitor sites.
+ SAY & DO
+"I'll add this to my cart and
+complete the purchase on my
+laptop later tonight."
+"I cannot locate the exact
+category I need — the
+navigation is confusing."
+Frequently abandons checkout
+flow when it requires more
+than three steps.
+Habitually applies price and
+rating filters before browsing
+product listings.
+Reads a minimum of five
+reviews before purchasing
+above ₹500.
+ PAINS
+Significant loading delays on
+product listing and image-
+heavy pages.
+Loss of cart items upon session
+expiry or when switching
+between devices.
+Unnecessarily complicated
+return/refund and order-
+tracking procedures.
+Unexpected charges appearing
+at the final step of checkout.
+ GAINS
+Time saved through a
+streamlined, guided checkout
+(Address → Payment →
+Confirm).
+Peace of mind from a trusted,
+recognisable payment gateway
+integration.
+High satisfaction when the
+search and filter system surfaces
+exactly what is needed within
+seconds.
+
+3. Persona 2 — "The Operationally-Stretched
+Store Administrator"
+PERSONA 2
+Name: The Operationally-Stretched Store Administrator
+Profile:  Small-to-medium  business  owner,  30–50  years  of  age,  moderate
+technical proficiency. Manages day-to-day store operations including inventory,
+pricing,  and  customer  order  fulfilment.  Time-constrained  and  seeking
+efficiency over advanced configuration.
+3.1 Detailed Dimension Analysis
+易 THINK & FEEL
+"I need to know, at a glance,
+how much revenue was
+generated this month versus
+last."
+"Updating product images takes
+far too long — I need a faster
+image upload process."
+Feels overwhelmed when order
+status updates require
+navigating multiple
+disconnected screens.
+Concerned about stock
+accuracy — fears overselling
+when checkout and inventory
+are not synchronised in real-
+time.
+ HEAR
+"You need a dashboard that
+shows your numbers clearly —
+not buried in spreadsheets."
+"Customers are complaining
+that product images are low
+quality and take ages to load."
+"You should be able to add a
+product listing in under two
+minutes."
+
+ SEE
+Competitors using integrated
+admin panels with real-time
+analytics widgets.
+Their own sales data trapped in
+manual, error-prone
+spreadsheet exports.
+E-commerce SaaS platforms
+with high monthly
+subscription costs.
+ SAY & DO
+"Every time I upload a new
+product, I need to manually
+resize and host the images."
+"I have no way to see which
+products are underperforming."
+Spends disproportionate time
+on repetitive admin tasks that
+should be automated.
+Delays fulfilling orders because
+the order list interface is
+difficult to parse.
+ PAINS
+No centralised dashboard
+presenting aggregated sales
+metrics and order statuses.
+Image management is a
+significant operational
+bottleneck without CDN
+support.
+Inability to quickly identify
+low-stock items before they go
+out of stock.
+ GAINS
+A dedicated, secure /admin
+panel with role-protected
+access.
+Cloudinary-powered image
+uploads that auto-optimise and
+serve via CDN.
+Sales analytics (monthly
+revenue charts, order volume
+trends) at a glance.
+One-click order status updates
+(Processing → Shipped →
+Delivered).
+
+4. Persona Comparison Summary
+Dimension
+Persona 1 — B2C
+Shopper
+Persona 2 — Store
+Administrator
+Primary GoalFind and purchase
+products quickly and
+securely
+Manage inventory and
+monitor business
+performance efficiently
+Core PainCart loss, slow site,
+confusing checkout
+No analytics dashboard,
+manual image handling
+Core GainStreamlined checkout,
+trusted payment
+gateway
+Cloudinary CDN, real-time
+sales metrics
+Platform
+Feature
+Needed
+Search & Filter,
+Persistent Cart, 3-step
+Checkout
+Admin Panel, Cloudinary
+Upload, Revenue Charts
+Tech EnablerReact SPA + MongoDB
+Cart + Stripe/Razorpay
+Node.js Admin API +
+Cloudinary + MongoDB
+Aggregation
+5. Conclusion
+The empathy maps for both personas reveal a shared underlying theme: the demand for
+speed,  trust,  and  operational  efficiency.  The  B2C  Shopper  requires  a  fast,
+transparent,  and  secure  purchasing  experience.  The  Store  Administrator  requires  a
+centralised,  automated  operations  platform.  Both  sets  of  needs  are  systematically
+addressed  by  the  ShopEZ  feature  set,  as  validated  in  the Problem–Solution  Fit  and
+Requirement Analysis documents. Every platform feature should be evaluated against its
+contribution  to  resolving  at  least  one  documented  Pain  or  enabling  at  least  one
+documented Gain for these two primary personas.
+
+ShopEZ MERN E-commerce Application · Brainstorming & Ideation Phase · Empathy Map
+Canvas · v1.1 · June 2026 · Prepared by V S S S Manikanta

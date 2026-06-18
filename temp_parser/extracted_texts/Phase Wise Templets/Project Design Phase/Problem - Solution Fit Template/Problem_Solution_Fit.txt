@@ -1,0 +1,133 @@
+
+
+VIP C2 PROGRAMME — FULL STACK DEVELOPMENT WITH
+MERN
+Problem – Solution Fit
+ShopEZ — MERN Stack E-commerce Application
+Phase: Project Design Phase
+Document Version: 1.1
+Date: 18th of june, 2026
+Prepared by: V S S S Manikanta
+Classification: Project Documentation — For Academic Submission
+
+Problem – Solution Fit
+1. Introduction
+This document formally validates the Problem–Solution Fit of the ShopEZ platform.
+Fit is achieved when a proposed solution demonstrably and efficiently addresses the core
+pain  points  of  target  customer  segments  while  delivering  measurable  gains  that
+differentiate it from existing market alternatives.
+2. Customer Journey → Problem → Solution
+Mapping
+✅ ShopEZ Solutions⚠ Identified Problems
+ Customer Journey
+Full-text search + filters
+MongoDB-backed persistent cart
+3-Step guided checkout wizard
+Stripe / Razorpay PCI-DSS
+Order history & status tracking
+Poor search & filtering
+Cart state lost across devices
+Confusing checkout flow
+Untrusted payment options
+No order visibility
+Searches ProductsDiscovers platform
+Adds items to cart
+Proceeds to Checkout
+Completes PaymentTracks Order
+FIGURE 7.1 — CUSTOMER JOURNEY → PROBLEM → SOLUTION
+MAPPING
+
+3. Competitive Analysis
+CriterionShopifyWooCommerce
+Custom
+PHP
+ShopEZ
+(MERN)
+CustomisabilityLimitedModerateHigh✅ Full
+Control
+SPA
+Performance
+❌ No
+(SSR)
+❌ No (SSR)❌ No✅ React
+SPA
+Monthly Cost₹2,000–
+₹20,000
+₹500–₹5,000Variable✅ Low
+(Free
+Tiers)
+Cross-Device
+Cart
+✅ Yes✅ Yes❌ No✅ Yes
+(MongoDB)
+Admin
+Dashboard
+✅
+Basic
+✅ Plugin-
+based
+❌
+Manual
+✅ Custom
+Analytics
+Payment
+Gateways
+LimitedMultiple
+(plugins)
+Manual✅ Stripe +
+Razorpay
+Image CDN✅ Yes❌ No❌ No✅
+Cloudinary
+Developer
+Ownership
+❌
+Lock-in
+Partial✅ Yes✅ Full
+Ownership
+ScalabilityLimited
+by plan
+Limited by
+hosting
+Complex✅
+Stateless
+API
+
+4. Fit Validation Summary
+ProblemSolution ProvidedFit?
+Cart state lost across
+sessions
+MongoDB-persisted cart linked to
+user ID
+✅
+Yes
+Poor search &
+discovery
+Full-text search + multi-criteria filter
+API
+✅
+Yes
+Confusing checkout3-step guided wizard (Address →
+Method → Payment)
+✅
+Yes
+Untrusted payment
+process
+Stripe / Razorpay PCI-DSS compliant
+gateway
+✅
+Yes
+Slow page loadsReact SPA + Cloudinary CDN✅
+Yes
+No admin analyticsCustom Admin Dashboard with
+revenue charts
+✅
+Yes
+Manual image hostingCloudinary auto-optimise & CDN
+delivery
+✅
+Yes
+Overall Assessment: ✅ Validated — All identified problems have
+documented and implemented solution counterparts. Problem–
+Solution Fit is confirmed for both primary customer segments.
+ShopEZ MERN E-commerce Application · Project Design Phase · Problem – Solution Fit ·
+v1.1 · June 2026
