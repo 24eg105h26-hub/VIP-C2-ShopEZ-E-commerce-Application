@@ -1183,3 +1183,38 @@
 {"level":"info","message":"GET /api/products? 304 - - 90.540 ms","timestamp":"2026-06-18 12:43:57"}
 {"level":"info","message":"GET /api/products? 304 - - 117.124 ms","timestamp":"2026-06-18 12:43:57"}
 {"level":"info","message":"GET /api/cart?guestId=guest_ez32uodrzpnwbnpcai8snn 200 208 - 55.424 ms","timestamp":"2026-06-18 12:44:47"}
+{"level":"warn","message":"SMTP settings not found. Fallback configured to Ethereal Email sandbox.","timestamp":"2026-06-22 10:38:16"}
+{"level":"warn","message":"Stripe SECRET_KEY is not defined. Stripe payments will operate in sandbox emulation.","timestamp":"2026-06-22 10:38:17"}
+{"level":"warn","message":"Razorpay KEY_ID/SECRET not defined. Razorpay payments will operate in sandbox emulation.","timestamp":"2026-06-22 10:38:17"}
+{"level":"info","message":"Server running in development mode on port 5000","timestamp":"2026-06-22 10:38:17"}
+{"level":"info","message":"Socket connected: DT5rwHYmt8xxwurZAAAC","timestamp":"2026-06-22 10:38:36"}
+{"level":"info","message":"GET /api/categories 304 - - 28.292 ms","timestamp":"2026-06-22 10:38:36"}
+{"level":"info","message":"GET /api/categories 304 - - 9.126 ms","timestamp":"2026-06-22 10:38:36"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 95.373 ms","timestamp":"2026-06-22 10:38:36"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 14.619 ms","timestamp":"2026-06-22 10:38:36"}
+{"level":"info","message":"Socket connected: 1i4bRaxGTEiZZrlQAAAF","timestamp":"2026-06-22 10:38:37"}
+{"level":"info","message":"GET /api/categories 304 - - 38.397 ms","timestamp":"2026-06-22 10:38:37"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 59.136 ms","timestamp":"2026-06-22 10:38:37"}
+{"level":"info","message":"GET /api/categories 304 - - 12.627 ms","timestamp":"2026-06-22 10:38:37"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 28.795 ms","timestamp":"2026-06-22 10:38:37"}
+{"level":"info","message":"Socket disconnected: DT5rwHYmt8xxwurZAAAC","timestamp":"2026-06-22 10:38:39"}
+{"level":"info","message":"GET /api/categories 304 - - 29.341 ms","timestamp":"2026-06-22 10:39:33"}
+{"level":"info","message":"GET /api/categories 304 - - 16.529 ms","timestamp":"2026-06-22 10:39:33"}
+{"level":"info","message":"GET /api/products?category=electronics 200 9292 - 259.365 ms","timestamp":"2026-06-22 10:39:33"}
+{"level":"info","message":"GET /api/products?category=electronics 304 - - 116.045 ms","timestamp":"2026-06-22 10:39:34"}
+{"level":"info","message":"GET /api/categories 304 - - 39.069 ms","timestamp":"2026-06-22 10:39:40"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 105.946 ms","timestamp":"2026-06-22 10:39:40"}
+{"level":"info","message":"GET /api/categories 304 - - 13.542 ms","timestamp":"2026-06-22 10:39:40"}
+{"level":"info","message":"GET /api/products/recommendations 304 - - 34.849 ms","timestamp":"2026-06-22 10:39:40"}
+{"level":"info","message":"GET /api/categories 304 - - 27.365 ms","timestamp":"2026-06-22 10:39:42"}
+{"level":"info","message":"GET /api/products? 304 - - 41.647 ms","timestamp":"2026-06-22 10:39:42"}
+{"level":"info","message":"GET /api/categories 304 - - 9.080 ms","timestamp":"2026-06-22 10:39:42"}
+{"level":"info","message":"GET /api/products? 304 - - 25.915 ms","timestamp":"2026-06-22 10:39:42"}
+{"level":"info","message":"GET /api/products/wipro-16a-smart-wi-fi-plug 200 1325 - 31.677 ms","timestamp":"2026-06-22 10:39:44"}
+{"level":"info","message":"GET /api/products/wipro-16a-smart-wi-fi-plug 304 - - 18.936 ms","timestamp":"2026-06-22 10:39:44"}
+{"level":"info","message":"GET /api/reviews/6a33983ad7f1a9c9ae798e79 200 65 - 18.683 ms","timestamp":"2026-06-22 10:39:44"}
+{"level":"info","message":"GET /api/reviews/6a33983ad7f1a9c9ae798e79 304 - - 15.343 ms","timestamp":"2026-06-22 10:39:44"}
+{"level":"info","message":"GET /api/products/wipro-16a-smart-wi-fi-plug/related 200 4209 - 22.388 ms","timestamp":"2026-06-22 10:39:44"}
+{"level":"info","message":"GET /api/products/wipro-16a-smart-wi-fi-plug/related 304 - - 16.453 ms","timestamp":"2026-06-22 10:39:44"}
+{"level":"info","message":"POST /api/cart 200 1077 - 225.412 ms","timestamp":"2026-06-22 10:39:49"}
+{"level":"info","message":"Socket disconnected: 1i4bRaxGTEiZZrlQAAAF","timestamp":"2026-06-22 10:40:11"}
